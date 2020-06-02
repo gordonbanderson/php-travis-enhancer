@@ -9,8 +9,23 @@
             "email": "gordon.b.anderson@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Suilven\\PHPTravisEnhancer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Suilven\\PHPTravisEnhancer\\": "tests"
+        }
+    },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "symfony/yaml": "^5.2@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.1",
+        "vimeo/psalm": "^3.11"
     }
 }
