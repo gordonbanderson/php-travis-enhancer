@@ -16,6 +16,7 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
         $this->removeIfExists(self::TRAVIS_FILE);
     }
 
+
     public function tearDown(): void
     {
         parent::tearDown();
@@ -24,11 +25,13 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
 
     }
 
+
     public function testDuplicationEmptyTravisFile(): void
     {
         $task = new AddDuplicationCheckTask();
         $task->run(self::TRAVIS_FILE);
     }
+
 
     public function testDuplicationExistingTravisFile(): void
     {

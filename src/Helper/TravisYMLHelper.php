@@ -21,6 +21,7 @@ class TravisYMLHelper
         $this->travisFileName = $travisFileName;
     }
 
+
     /**
      * Load the Travis file, or default to an empty array if it does not exist
      *

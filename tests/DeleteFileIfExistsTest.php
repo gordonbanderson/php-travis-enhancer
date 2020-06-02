@@ -15,6 +15,7 @@ class DeleteFileIfExistsTest extends TestCase
         $this->assertFalse(\file_exists($filename));
     }
 
+
     /**
      * Remove a file if it exists in the root directory of the project. Used for testing different Travis scenarios,
      * and then clean up
@@ -32,6 +33,7 @@ class DeleteFileIfExistsTest extends TestCase
         \error_log('  ^^ PATH EXISTS, DELETING IT');
         \unlink($path);
     }
+
 
     /**
      * Copy the sample Travis file to $filename in the root of the project
