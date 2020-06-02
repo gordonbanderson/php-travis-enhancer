@@ -7,8 +7,6 @@ use PHPUnit\Framework\TestCase;
 class DeleteFileIfExistsTest extends TestCase
 {
 
-    const TRAVIS_FILE = '.travis-duplicate.yml';
-
     public function testRemoveIfExists(): void
     {
         $filename = '.travis-to-rm';
@@ -17,7 +15,13 @@ class DeleteFileIfExistsTest extends TestCase
         $this->assertFalse(\file_exists($filename));
     }
 
-    protected function removeIfExists($filename): void
+    /**
+     * Remove a file if it exists in the root directory of the project. Used for testing different Travis scenarios,
+     * and then clean up
+     *
+     * @param string $filename the name of the file, without directory, to remove if it exists
+     */
+    protected function removeIfExists(string $filename): void
     {
         $path = \getcwd() . '/' . $filename;
         \error_log('CHECKING PATH: ' . $path);
@@ -29,7 +33,12 @@ class DeleteFileIfExistsTest extends TestCase
         \unlink($path);
     }
 
-    protected function copySampleTravisFileTo($filename): void
+    /**
+     * Copy the sample Travis file to $filename in the root of the project
+     *
+     * @param string $filename the name of the file to copy to, without directory path
+     */
+    protected function copySampleTravisFileTo(string $filename): void
     {
         \copy(\getcwd() . '/tests/files/.travis.yml', \getcwd() . '/' . $filename);
     }

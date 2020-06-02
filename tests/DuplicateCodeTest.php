@@ -7,7 +7,7 @@ use Suilven\PHPTravisEnhancer\AddDuplicationCheckTask;
 class DuplicateCodeTest extends DeleteFileIfExistsTest
 {
 
-    const TRAVIS_FILE = '.travis-duplicate.yml';
+    private const TRAVIS_FILE = '.travis-duplicate.yml';
 
     public function setUp(): void
     {

@@ -7,7 +7,12 @@ use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
 class AddDuplicationCheckTask
 {
 
-    public function run($travisFile = '.travis.yml'): void
+    /**
+     * Update Travis file to incorporate a check for duplicate code
+     *
+     * @param string $travisFile An injectable filename (for testing), leave blank for default of .travis.yml
+     */
+    public function run(string $travisFile = '.travis.yml'): void
     {
         $helper = new TravisYMLHelper($travisFile);
         $yaml = $helper->loadTravis();
