@@ -1,0 +1,16 @@
+{
+    "name": "suilven/php-travis-enhancer",
+    "description": "Add code quality tools for PHP analysis, and search for code duplication",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gordon Anderson",
+            "email": "gordon.b.anderson@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/yaml": "^5.2@dev"
+    }
+}
