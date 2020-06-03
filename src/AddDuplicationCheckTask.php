@@ -58,7 +58,7 @@ class AddDuplicationCheckTask
      * Ensure that a hierarchy exists in a PHP array. Pass the hierarchy in the form matrix/include, this will populate
      * the path an empty leaf array
      *
-     * @param array $yamlAsArray YAML file converted into an array. Can of course be any array
+     * @param array<array> $yamlAsArray YAML file converted into an array. Can of course be any array
      * @param string $path The hierarchy required to exist, in the form matrix/include (forward slash separated)
      */
     private function ensurePathExistsInYaml(array &$yamlAsArray, string $path): void

@@ -43,7 +43,7 @@ class TravisYMLHelper
     /**
      * Save a travis file, default .travis.yml, in the root of a project
      *
-     * @param array $yamlArray an array that ought to have been formed from a YAML file
+     * @param array<array> $yamlArray an array that ought to have been formed from a YAML file
      */
     public function saveTravis(array $yamlArray): void
     {
