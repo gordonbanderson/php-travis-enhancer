@@ -40,9 +40,9 @@ class AddDuplicationCheckTask
 
             // install jdscpd, node tool, for duplication detection
             $this->ensurePathExistsInYaml($yamlAsArray, 'before_script');
-            $yamlAsArray['before_script'][] = 'if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl -sL '
-                . 'https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && '
-                . 'sudo apt install -y build-essential nodejs && which npm && npm install jscpd@3.2.1  ;fi';
+            $yamlAsArray['before_script'][] = 'if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl '
+                . '-sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh '
+                . '&& sudo apt install -y build-essential nodejs && which npm && npm install jscpd@3.2.1  ;fi';
 
             // run jscpd on src and tests dir
             $this->ensurePathExistsInYaml($yamlAsArray, 'script');

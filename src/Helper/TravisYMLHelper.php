@@ -40,11 +40,14 @@ class TravisYMLHelper
     }
 
 
-    public function saveTravis($yamlArray): void
+    /**
+     * Save a travis file, default .travis.yml, in the root of a project
+     *
+     * @param array $yamlArray an array that ought to have been formed from a YAML file
+     */
+    public function saveTravis(array $yamlArray): void
     {
         $yaml = Yaml::dump($yamlArray, Yaml::DUMP_OBJECT_AS_MAP);
-        $path = \getcwd() . '/' . $this->travisFileName;
-
         \file_put_contents($this->travisFileName, $yaml);
     }
 }
