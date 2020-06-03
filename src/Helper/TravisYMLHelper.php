@@ -30,14 +30,21 @@ class TravisYMLHelper
      */
     public function loadTravis()
     {
-        \error_log('++++ LOADING TRAVIS ++++');
         $result = [];
         $path = \getcwd() . '/' . $this->travisFileName;
-        \error_log('PATH: ' . $path);
         if (\file_exists($this->travisFileName)) {
             $result = Yaml::parseFile($path);
         }
 
         return $result;
+    }
+
+
+    public function saveTravis($yamlArray)
+    {
+        $yaml = Yaml::dump($yamlArray, Yaml::DUMP_OBJECT_AS_MAP);
+        $path = \getcwd() . '/' . $this->travisFileName;
+
+        file_put_contents($this->travisFileName, $yaml);
     }
 }
