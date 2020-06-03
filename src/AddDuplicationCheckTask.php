@@ -16,5 +16,6 @@ class AddDuplicationCheckTask
     {
         $helper = new TravisYMLHelper($travisFile);
         $yaml = $helper->loadTravis();
+        \var_export($yaml);
     }
 }
