@@ -40,5 +40,4 @@ class TravisYMLHelper
 
         return $result;
     }
-
 }

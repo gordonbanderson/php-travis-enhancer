@@ -44,5 +44,4 @@ class DeleteFileIfExistsTest extends TestCase
     {
         \copy(\getcwd() . '/tests/files/.travis.yml', \getcwd() . '/' . $filename);
     }
-
 }
