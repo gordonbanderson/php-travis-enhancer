@@ -1,36 +1,38 @@
-<?php
-
+<?php declare(strict_types = 1);
 
 namespace Suilven\PHPTravisEnhancer\Tests;
 
-
-use PHPUnit\Framework\TestCase;
 use Suilven\PHPTravisEnhancer\AddDuplicationCheckTask;
 
 class DuplicateCodeTest extends DeleteFileIfExistsTest
 {
-    const TRAVIS_FILE = '.travis-duplicate.yml';
 
-    public function setUp()
+    private const TRAVIS_FILE = '.travis-duplicate.yml';
+
+    public function setUp(): void
     {
         parent::setUp();
+
         $this->removeIfExists(self::TRAVIS_FILE);
     }
 
-    public function tearDown()
+
+    public function tearDown(): void
     {
         parent::tearDown();
-        $this->removeIfExists(self::TRAVIS_FILE);
 
+        $this->removeIfExists(self::TRAVIS_FILE);
     }
 
-    public function testDuplicationEmptyTravisFile()
+
+    public function testDuplicationEmptyTravisFile(): void
     {
         $task = new AddDuplicationCheckTask();
         $task->run(self::TRAVIS_FILE);
     }
 
-    public function testDuplicationExistingTravisFile()
+
+    public function testDuplicationExistingTravisFile(): void
     {
         $this->copySampleTravisFileTo(self::TRAVIS_FILE);
         $task = new AddDuplicationCheckTask();

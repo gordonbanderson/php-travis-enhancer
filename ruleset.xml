@@ -2,6 +2,7 @@
 <ruleset name="Suilven-RandomEnglish">
 	<config name="installed_paths" value="../../slevomat/coding-standard"/><!-- relative path from PHPCS source location -->
 
+	<rule ref="PSR2"/>
 	<rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
 	<rule ref="SlevomatCodingStandard.Arrays.MultiLineArrayEndBracketPlacement"/>
 	<rule ref="SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation"/>
@@ -19,13 +20,18 @@
 	<rule ref="SlevomatCodingStandard.Classes.RequireMultiLineMethodSignature"/>
 	<rule ref="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming"/>
 	<rule ref="SlevomatCodingStandard.Classes.PropertySpacing"/>
-	<rule ref="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces"/>
+	<!-- <rule ref="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces"/> -->
 	<rule ref="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
 	<rule ref="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming"/>
 	<rule ref="SlevomatCodingStandard.Classes.ParentCallSpacing"/>
 	<!-- <rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements"/> -->
 	<rule ref="SlevomatCodingStandard.Classes.TraitUseSpacing"/>
-	<rule ref="SlevomatCodingStandard.Classes.MethodSpacing"/>
+	<rule ref="SlevomatCodingStandard.Classes.MethodSpacing">
+		<properties>
+			<property name="minLinesCount" value="2"/>
+			<property name="maxLinesCount" value="2"/>
+		</properties>
+	</rule>
 	<rule ref="SlevomatCodingStandard.Classes.SuperfluousTraitNaming"/>
 	<rule ref="SlevomatCodingStandard.Classes.DisallowMultiConstantDefinition"/>
 
@@ -139,7 +145,7 @@
 	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
 	-->
 	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
-	<rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/>
+	<!-- <rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/> -->
 	<rule ref="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
