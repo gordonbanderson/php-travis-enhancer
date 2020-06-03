@@ -42,7 +42,8 @@ class DeleteFileIfExistsTest extends TestCase
         \copy(\getcwd() . '/tests/files/.travis.yml', \getcwd() . '/' . $filename);
     }
 
-    protected function assertExpectedFileContents($filename, $expectedFile)
+
+    protected function assertExpectedFileContents($filename, $expectedFile): void
     {
         $path = \getcwd() . '/' . $filename;
         $expectedFilePath = \getcwd() . '/tests/expected/' . $expectedFile;

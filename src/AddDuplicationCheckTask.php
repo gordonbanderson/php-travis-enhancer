@@ -3,7 +3,6 @@
 namespace Suilven\PHPTravisEnhancer;
 
 use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
-use Symfony\Component\Yaml\Yaml;
 
 class AddDuplicationCheckTask
 {
@@ -36,7 +35,7 @@ class AddDuplicationCheckTask
             // add a matrix entry
             $yamlAsArray['matrix']['include'][] = [
                 'php' => 7.4,
-                'env' => 'DUPLICATE_CODE_CHECK=1'
+                'env' => 'DUPLICATE_CODE_CHECK=1',
             ];
 
             // install jdscpd, node tool, for duplication detection
@@ -56,24 +55,24 @@ class AddDuplicationCheckTask
 
 
     /**
-     * Ensure that a hierarchy exists in a PHP array.  Pass the hierarchy in the form matrix/include, this will populate
+     * Ensure that a hierarchy exists in a PHP array. Pass the hierarchy in the form matrix/include, this will populate
      * the path an empty leaf array
      *
-     * @param array $yamlAsArray YAML file converted into an array.  Can of course be any array
+     * @param array $yamlAsArray YAML file converted into an array. Can of course be any array
      * @param string $path The hierarchy required to exist, in the form matrix/include (forward slash separated)
      */
-    private function ensurePathExistsInYaml(&$yamlAsArray, $path): void
+    private function ensurePathExistsInYaml(array &$yamlAsArray, string $path): void
     {
         $pathParts = \explode('/', $path);
-            $part = array_shift($pathParts);
-            if (!isset($yamlAsArray[$part])) {
-                $yamlAsArray[$part] = [];
-            }
-            $remainingPath = implode('/', $pathParts);
-            if (sizeof($pathParts) == 0) {
-                return;
-            } else {
-                $this->ensurePathExistsInYaml($yamlAsArray[$part], $remainingPath);
-            }
+            $part = \array_shift($pathParts);
+        if (!isset($yamlAsArray[$part])) {
+            $yamlAsArray[$part] = [];
+        }
+            $remainingPath = \implode('/', $pathParts);
+        if (\sizeof($pathParts) === 0) {
+            return;
+        }
+
+        $this->ensurePathExistsInYaml($yamlAsArray[$part], $remainingPath);
     }
 }

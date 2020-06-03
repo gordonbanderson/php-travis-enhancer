@@ -21,7 +21,7 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
     {
         parent::tearDown();
 
-       $this->removeIfExists(self::TRAVIS_FILE);
+        $this->removeIfExists(self::TRAVIS_FILE);
     }
 
 
@@ -30,7 +30,6 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
         $task = new AddDuplicationCheckTask();
         $task->run(self::TRAVIS_FILE);
         $this->assertExpectedFileContents(self::TRAVIS_FILE, 'testDuplicationEmptyTravisFile.yml');
-
     }
 
 

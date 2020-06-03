@@ -40,11 +40,11 @@ class TravisYMLHelper
     }
 
 
-    public function saveTravis($yamlArray)
+    public function saveTravis($yamlArray): void
     {
         $yaml = Yaml::dump($yamlArray, Yaml::DUMP_OBJECT_AS_MAP);
         $path = \getcwd() . '/' . $this->travisFileName;
 
-        file_put_contents($this->travisFileName, $yaml);
+        \file_put_contents($this->travisFileName, $yaml);
     }
 }
