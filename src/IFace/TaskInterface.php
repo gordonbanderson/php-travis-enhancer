@@ -2,10 +2,10 @@
 
 namespace Suilven\PHPTravisEnhancer\IFace;
 
-
 interface TaskInterface
 {
-    public function getFlag();
+    public function getFlag(): void;
+
 
     public function run(string $travisFile = '.travis.yml'): void;
 }

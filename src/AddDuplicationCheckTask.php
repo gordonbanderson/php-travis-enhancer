@@ -2,9 +2,8 @@
 
 namespace Suilven\PHPTravisEnhancer;
 
-
 use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
-use  Suilven\PHPTravisEnhancer\IFace\TaskInterface;
+use Suilven\PHPTravisEnhancer\IFace\TaskInterface;
 
 class AddDuplicationCheckTask implements TaskInterface
 {
@@ -13,8 +12,9 @@ class AddDuplicationCheckTask implements TaskInterface
 
     public function getFlag()
     {
-        return FLAG;
+        return \FLAG;
     }
+
 
     /**
      * Update Travis file to incorporate a check for duplicate code
@@ -49,7 +49,4 @@ class AddDuplicationCheckTask implements TaskInterface
 
         $helper->saveTravis($yamlAsArray);
     }
-
-
-
 }
