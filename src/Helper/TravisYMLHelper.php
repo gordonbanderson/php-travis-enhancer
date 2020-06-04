@@ -43,7 +43,8 @@ class TravisYMLHelper
     /**
      * Save a travis file, default .travis.yml, in the root of a project
      *
-     * @param array<array> $yamlArray an array that ought to have been formed from a YAML file
+     * @todo How does one specifiy this as an associative array?
+     * @param array<string> $yamlArray an array that ought to have been formed from a YAML file
      */
     public function saveTravis(array $yamlArray): void
     {
