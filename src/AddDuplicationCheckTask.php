@@ -2,10 +2,19 @@
 
 namespace Suilven\PHPTravisEnhancer;
 
-use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
 
-class AddDuplicationCheckTask
+use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
+use  Suilven\PHPTravisEnhancer\IFace\TaskInterface;
+
+class AddDuplicationCheckTask implements TaskInterface
 {
+
+    private const FLAG = 'DUPLICATE_CODE_CHECK';
+
+    public function getFlag()
+    {
+        return FLAG;
+    }
 
     /**
      * Update Travis file to incorporate a check for duplicate code
