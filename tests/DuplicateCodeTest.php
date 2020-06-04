@@ -29,6 +29,7 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
     {
         $task = new AddDuplicationCheckTask();
         $task->run(self::TRAVIS_FILE);
+        $this->assertExpectedFileContents(self::TRAVIS_FILE, 'testDuplicationEmptyTravisFile.yml');
     }
 
 
@@ -37,5 +38,6 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
         $this->copySampleTravisFileTo(self::TRAVIS_FILE);
         $task = new AddDuplicationCheckTask();
         $task->run(self::TRAVIS_FILE);
+        $this->assertExpectedFileContents(self::TRAVIS_FILE, 'testDuplicationExistingTravisFile.yml');
     }
 }

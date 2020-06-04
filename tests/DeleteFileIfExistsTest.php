@@ -25,12 +25,9 @@ class DeleteFileIfExistsTest extends TestCase
     protected function removeIfExists(string $filename): void
     {
         $path = \getcwd() . '/' . $filename;
-        \error_log('CHECKING PATH: ' . $path);
         if (!\file_exists($path)) {
             return;
         }
-
-        \error_log('  ^^ PATH EXISTS, DELETING IT');
         \unlink($path);
     }
 
@@ -43,5 +40,19 @@ class DeleteFileIfExistsTest extends TestCase
     protected function copySampleTravisFileTo(string $filename): void
     {
         \copy(\getcwd() . '/tests/files/.travis.yml', \getcwd() . '/' . $filename);
+    }
+
+
+    /**
+     * Assert that the contents of $filename are the same as $expectedFile, relative to the codebase
+     *
+     * @param string $filename filename of actual contents
+     * @param string $expectedFile filename of expected contents
+     */
+    protected function assertExpectedFileContents(string $filename, string $expectedFile): void
+    {
+        $path = \getcwd() . '/' . $filename;
+        $expectedFilePath = \getcwd() . '/tests/expected/' . $expectedFile;
+        $this->assertFileEquals($expectedFilePath, $path);
     }
 }

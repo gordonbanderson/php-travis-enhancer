@@ -30,14 +30,25 @@ class TravisYMLHelper
      */
     public function loadTravis()
     {
-        \error_log('++++ LOADING TRAVIS ++++');
         $result = [];
         $path = \getcwd() . '/' . $this->travisFileName;
-        \error_log('PATH: ' . $path);
         if (\file_exists($this->travisFileName)) {
             $result = Yaml::parseFile($path);
         }
 
         return $result;
+    }
+
+
+    /**
+     * Save a travis file, default .travis.yml, in the root of a project
+     *
+     * @todo How does one specifiy this as an associative array?
+     * @param array<string> $yamlArray an array that ought to have been formed from a YAML file
+     */
+    public function saveTravis(array $yamlArray): void
+    {
+        $yaml = Yaml::dump($yamlArray, Yaml::DUMP_OBJECT_AS_MAP);
+        \file_put_contents($this->travisFileName, $yaml);
     }
 }
