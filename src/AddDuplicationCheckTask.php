@@ -17,11 +17,9 @@ class AddDuplicationCheckTask
         $helper = new TravisYMLHelper($travisFile);
         $yamlAsArray = $helper->loadTravis();
 
-        $this->ensurePathExistsInYaml($yamlAsArray, 'matrix/include');
+        $helper->ensurePathExistsInYaml($yamlAsArray, 'matrix/include');
 
-        if ($helper->checkForExistingInEnv($yamlAsArray, 'DUPLICATE_CODE_CHECK')) {
-            return;
-        } else {
+        if (!$helper->checkForExistingInEnv($yamlAsArray, 'DUPLICATE_CODE_CHECK')) {
             // add a matrix entry
             $yamlAsArray['matrix']['include'][] = [
                 'php' => 7.4,
@@ -29,13 +27,13 @@ class AddDuplicationCheckTask
             ];
 
             // install jdscpd, node tool, for duplication detection
-            $this->ensurePathExistsInYaml($yamlAsArray, 'before_script');
+            $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
             $yamlAsArray['before_script'][] = 'if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl '
                 . '-sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh '
                 . '&& sudo apt install -y build-essential nodejs && which npm && npm install jscpd@3.2.1  ;fi';
 
             // run jscpd on src and tests dir
-            $this->ensurePathExistsInYaml($yamlAsArray, 'script');
+            $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
             $yamlAsArray['script'][] = 'if [[ $DUPLICATE_CODE_CHECK ]]; then node_modules/jscpd/bin/jscpd src && '
                 . 'node_modules/jscpd/bin/jscpd tests ; fi';
         }
@@ -44,25 +42,5 @@ class AddDuplicationCheckTask
     }
 
 
-    /**
-     * Ensure that a hierarchy exists in a PHP array. Pass the hierarchy in the form matrix/include, this will populate
-     * the path an empty leaf array
-     *
-     * @param array<string> $yamlAsArray YAML file converted into an array. Can of course be any associative array
-     * @param string $path The hierarchy required to exist, in the form matrix/include (forward slash separated)
-     */
-    private function ensurePathExistsInYaml(array &$yamlAsArray, string $path): void
-    {
-        $pathParts = \explode('/', $path);
-            $part = \array_shift($pathParts);
-        if (!isset($yamlAsArray[$part])) {
-            $yamlAsArray[$part] = [];
-        }
-            $remainingPath = \implode('/', $pathParts);
-        if (\sizeof($pathParts) === 0) {
-            return;
-        }
 
-        $this->ensurePathExistsInYaml($yamlAsArray[$part], $remainingPath);
-    }
 }
