@@ -22,6 +22,22 @@ class TravisYMLHelper
     }
 
 
+    public function checkForExistingInEnv($yamlAsArray, $flag)
+    {
+        $foundExisting = false;
+        foreach ($yamlAsArray['matrix']['include'] as $entry) {
+            $env = $entry['env'];
+            if ($env !== ($flag . '=1')) {
+                continue;
+            }
+
+            $foundExisting = true;
+        }
+
+        return $foundExisting;
+    }
+
+
     /**
      * Load the Travis file, or default to an empty array if it does not exist
      *

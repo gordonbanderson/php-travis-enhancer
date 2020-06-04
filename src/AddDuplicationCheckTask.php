@@ -19,17 +19,7 @@ class AddDuplicationCheckTask
 
         $this->ensurePathExistsInYaml($yamlAsArray, 'matrix/include');
 
-        $foundExisting = false;
-        foreach ($yamlAsArray['matrix']['include'] as $entry) {
-            $env = $entry['env'];
-            if ($env !== 'DUPLICATE_CODE_CHECK=1') {
-                continue;
-            }
-
-            $foundExisting = true;
-        }
-
-        if ($foundExisting) {
+        if ($helper->checkForExistingInEnv($yamlAsArray, 'DUPLICATE_CODE_CHECK')) {
             return;
         } else {
             // add a matrix entry
