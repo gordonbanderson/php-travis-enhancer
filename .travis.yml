@@ -15,8 +15,6 @@ matrix:
     - php: 7.4
       env: PHPSTAN_TEST=1
     - php: 7.4
-      env: PHPUNIT_TEST=1 TRANSPORT=PhpHttp
-    - php: 7.4
       env: LINT_CHECK=1
     - php: 7.4
       env: DUPLICATE_CODE_CHECK=1
