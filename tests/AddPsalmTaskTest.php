@@ -3,7 +3,6 @@
 namespace Suilven\PHPTravisEnhancer\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Suilven\PHPTravisEnhancer\AddPHPLintTask;
 use Suilven\PHPTravisEnhancer\AddPsalmTask;
 
 class AddPsalmTaskTest extends TestCase
