@@ -2,10 +2,12 @@
 
 namespace Suilven\PHPTravisEnhancer\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Suilven\PHPTravisEnhancer\AddDuplicationCheckTask;
 
-class AddPHPLinkTaskTest extends DeleteFileIfExistsTest
+class AddPHPLinkTaskTest extends TestCase
 {
+    use TestingTrait;
 
     private const TRAVIS_FILE = '.travis-phplint.yml';
 

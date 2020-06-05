@@ -4,7 +4,7 @@ namespace Suilven\PHPTravisEnhancer\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-class DeleteFileIfExistsTest extends TestCase
+trait TestingTrait
 {
 
     public function testRemoveIfExists(): void
