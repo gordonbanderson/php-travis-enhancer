@@ -4,7 +4,7 @@ namespace Suilven\PHPTravisEnhancer\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-trait TestingTrait
+trait CommonTestingMethods
 {
 
     public function testRemoveIfExists(): void

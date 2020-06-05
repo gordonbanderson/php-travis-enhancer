@@ -7,7 +7,7 @@ use Suilven\PHPTravisEnhancer\AddPHPLintTask;
 
 class AddPHPLinkTaskTest extends TestCase
 {
-    use TestingTrait;
+    use CommonTestingMethods;
 
     private const TRAVIS_FILE = '.travis-phplint.yml';
 
