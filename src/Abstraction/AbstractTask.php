@@ -24,25 +24,31 @@ abstract class AbstractTask
 
         $helper->ensurePathExistsInYaml($yamlAsArray, 'matrix/include');
 
-        if (!$helper->checkForExistingInEnv($yamlAsArray, $this->getFlag())) {
+        $foundExisting = $helper->checkForExistingInEnv($yamlAsArray, $this->getFlag());
+        if (!$foundExisting) {
             // add a matrix entry
-            /*
             $yamlAsArray['matrix']['include'][] = [
                 'php' => 7.4,
                 'env' => $this->getFlag() . '=1',
             ];
-            */
 
-            // install jdscpd, node tool, for duplication detection
-            $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
-            $yamlAsArray['before_script'][] = 'if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl '
-                . '-sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh '
-                . '&& sudo apt install -y build-essential nodejs && which npm && npm install jscpd@3.2.1  ;fi';
+            /** @var string $prefix the bash prefix to check for the flag being set */
+            $prefix = 'if [[ $' . $this->getFlag() .' ]]; then ';
 
-            // run jscpd on src and tests dir
-            $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
-            $yamlAsArray['script'][] = 'if [[ $DUPLICATE_CODE_CHECK ]]; then node_modules/jscpd/bin/jscpd src && '
-                . 'node_modules/jscpd/bin/jscpd tests ; fi';
+            $beforeScript = $this->getBeforeScript();
+            if (isset($beforeScript)) {
+                // install jdscpd, node tool, for duplication detection
+                $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
+                $yamlAsArray['before_script'][] = $prefix .  $beforeScript . '  ;fi';
+            }
+
+            $script = $this->getScript();
+            if (isset($script)) {
+                // run jscpd on src and tests dir
+                $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
+                $yamlAsArray['script'][] = $prefix . $this->getScript() . ' ; fi';
+            }
+
         }
 
         $helper->saveTravis($yamlAsArray);

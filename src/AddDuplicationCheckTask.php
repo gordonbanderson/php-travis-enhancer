@@ -2,10 +2,11 @@
 
 namespace Suilven\PHPTravisEnhancer;
 
+use Suilven\PHPTravisEnhancer\Abstraction\AbstractTask;
 use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
 use Suilven\PHPTravisEnhancer\IFace\TaskInterface;
 
-class AddDuplicationCheckTask implements TaskInterface
+class AddDuplicationCheckTask extends AbstractTask implements TaskInterface
 {
     public function getFlag()
     {
@@ -24,39 +25,5 @@ class AddDuplicationCheckTask implements TaskInterface
     public function getScript()
     {
        return 'node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests';
-    }
-
-
-    /**
-     * Update Travis file to incorporate a check for duplicate code
-     *
-     * @param string $travisFile An injectable filename (for testing), leave blank for default of .travis.yml
-     */
-    public function run(string $travisFile = '.travis.yml'): void
-    {
-        $helper = new TravisYMLHelper($travisFile);
-        $yamlAsArray = $helper->loadTravis();
-
-        $helper->ensurePathExistsInYaml($yamlAsArray, 'matrix/include');
-
-        $foundExisting = $helper->checkForExistingInEnv($yamlAsArray, $this->getFlag());
-        if (!$foundExisting) {
-            // add a matrix entry
-            $yamlAsArray['matrix']['include'][] = [
-                'php' => 7.4,
-                'env' => $this->getFlag() . '=1',
-            ];
-
-            $prefix = 'if [[ $' . $this->getFlag() .' ]]; then ';
-            // install jdscpd, node tool, for duplication detection
-            $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
-            $yamlAsArray['before_script'][] = $prefix .  $this->getBeforeScript() . '  ;fi';
-
-            // run jscpd on src and tests dir
-            $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
-            $yamlAsArray['script'][] = $prefix . $this->getScript() . ' ; fi';
-        }
-
-        $helper->saveTravis($yamlAsArray);
     }
 }
