@@ -48,7 +48,7 @@ class TravisYMLHelper
     /**
      * Check for an existing entry of the bash variable in the Travis matrix
      *
-     * @param array<string> $yamlAsArray Yaml parsed into an array
+     * @param array<array<array<array<string>>>> $yamlAsArray Yaml parsed into an array
      * @param string $flag a bash variable flag, such as DUPLICATE_CHECK
      * @return bool true if an existing environment setting exists for this variable
      */

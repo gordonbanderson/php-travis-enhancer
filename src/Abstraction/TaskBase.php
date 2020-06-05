@@ -3,8 +3,9 @@
 namespace Suilven\PHPTravisEnhancer\Abstraction;
 
 use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
+use Suilven\PHPTravisEnhancer\IFace\Task;
 
-abstract class TaskBase
+abstract class TaskBase implements Task
 {
     abstract public function getFlag(): string;
 
