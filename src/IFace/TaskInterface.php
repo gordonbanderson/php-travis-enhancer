@@ -4,7 +4,12 @@ namespace Suilven\PHPTravisEnhancer\IFace;
 
 interface TaskInterface
 {
-    public function getFlag(): void;
+    /**
+     * @return string
+     */
+    public function getFlag();
+
+    public function getBeforeScript();
 
 
     public function run(string $travisFile = '.travis.yml'): void;
