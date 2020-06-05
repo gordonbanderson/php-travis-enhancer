@@ -11,18 +11,6 @@ matrix:
     - php: 7.4
       env: PHPUNIT_TEST=1
 
-    # Code compliance
-    - php: 7.4
-      env: PHPCS_TEST=1
-    - php: 7.4
-      env: PHPSTAN_TEST=1
-    - php: 7.4
-      env: PSALM_TEST=1
-
-env:
-  global:
-    - PHPSTAN_VERSION=^0.12
-
 before_script:
   - composer validate
 

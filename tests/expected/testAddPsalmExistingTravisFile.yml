@@ -15,16 +15,15 @@ matrix:
             env: PHPUNIT_TEST=1
         -
             php: 7.4
-            env: DUPLICATE_CODE_CHECK=1
+            env: PSALM_TEST=1
 before_script:
     - 'composer validate'
-    - 'if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt install -y build-essential nodejs && which npm && npm install jscpd@3.2.1  ;fi'
 install:
     - 'composer global require hirak/prestissimo'
     - 'composer install --prefer-dist'
 script:
     - 'if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit -d memory_limit=4G  tests/; fi'
     - 'if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit -d memory_limit=4G --coverage-clover=coverage.xml   tests/   ; fi'
-    - 'if [[ $DUPLICATE_CODE_CHECK ]]; then node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests ; fi'
+    - 'if [[ $PSALM_TEST ]]; then ./vendor/bin/psalm --show-info=true; ; fi'
 after_script:
     - 'if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi'

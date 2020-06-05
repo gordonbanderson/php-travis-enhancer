@@ -49,7 +49,7 @@ abstract class TaskBase implements Task
             if (isset($script)) {
                 // run jscpd on src and tests dir
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
-                $yamlAsArray['script'][] = $prefix . $this->getScript() . ' ; fi';
+                $yamlAsArray['script'][] = $prefix . $script . ' ; fi';
             }
         }
 
