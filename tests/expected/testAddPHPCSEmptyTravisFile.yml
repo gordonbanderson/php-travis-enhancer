@@ -1,0 +1,7 @@
+matrix:
+    include:
+        -
+            php: 7.4
+            env: PHPCS_TEST=1
+script:
+    - 'if [[ $PHPCS_TEST ]]; then vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests ; fi'
