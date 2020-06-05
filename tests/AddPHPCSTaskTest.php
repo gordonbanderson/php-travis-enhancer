@@ -12,20 +12,7 @@ class AddPHPCSTaskTest extends TestCase
 
     private const TRAVIS_FILE = '.travis-phpcs.yml';
 
-    public function setUp(): void
-    {
-        parent::setUp();
 
-        $this->removeIfExists(self::TRAVIS_FILE);
-    }
-
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-
-        $this->removeIfExists(self::TRAVIS_FILE);
-    }
 
 
     public function testPHPCSEmptyTravisFile(): void

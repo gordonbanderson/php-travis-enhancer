@@ -11,22 +11,7 @@ class AddPsalmTaskTest extends TestCase
     use CommonTestingMethods;
 
     private const TRAVIS_FILE = '.travis-psalm.yml';
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->removeIfExists(self::TRAVIS_FILE);
-    }
-
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-
-        $this->removeIfExists(self::TRAVIS_FILE);
-    }
-
+    
 
     public function testPsalmEmptyTravisFile(): void
     {

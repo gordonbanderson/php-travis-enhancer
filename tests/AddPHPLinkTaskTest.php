@@ -12,20 +12,7 @@ class AddPHPLinkTaskTest extends TestCase
 
     private const TRAVIS_FILE = '.travis-phplint.yml';
 
-    public function setUp(): void
-    {
-        parent::setUp();
 
-        $this->removeIfExists(self::TRAVIS_FILE);
-    }
-
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-
-        $this->removeIfExists(self::TRAVIS_FILE);
-    }
 
 
     public function testPHPLintEmptyTravisFile(): void
