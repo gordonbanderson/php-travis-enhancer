@@ -45,7 +45,14 @@ class TravisYMLHelper
     }
 
 
-    public function checkForExistingInEnv($yamlAsArray, $flag)
+    /**
+     * Check for an existing entry of the bash variable in the Travis matrix
+     *
+     * @param array<string> $yamlAsArray Yaml parsed into an array
+     * @param string $flag a bash variable flag, such as DUPLICATE_CHECK
+     * @return bool true if an existing environment setting exists for this variable
+     */
+    public function checkForExistingInEnv(array $yamlAsArray, string $flag): bool
     {
         $foundExisting = false;
         foreach ($yamlAsArray['matrix']['include'] as $entry) {

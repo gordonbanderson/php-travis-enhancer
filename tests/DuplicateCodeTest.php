@@ -2,7 +2,7 @@
 
 namespace Suilven\PHPTravisEnhancer\Tests;
 
-use Suilven\PHPTravisEnhancer\AddDuplicationCheckTask;
+use Suilven\PHPTravisEnhancer\AddDuplicationCheckTaskBase;
 
 class DuplicateCodeTest extends DeleteFileIfExistsTest
 {
@@ -27,7 +27,7 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
 
     public function testDuplicationEmptyTravisFile(): void
     {
-        $task = new AddDuplicationCheckTask();
+        $task = new AddDuplicationCheckTaskBase();
         $task->run(self::TRAVIS_FILE);
         $this->assertExpectedFileContents(self::TRAVIS_FILE, 'testDuplicationEmptyTravisFile.yml');
     }
@@ -36,7 +36,7 @@ class DuplicateCodeTest extends DeleteFileIfExistsTest
     public function testDuplicationExistingTravisFile(): void
     {
         $this->copySampleTravisFileTo(self::TRAVIS_FILE);
-        $task = new AddDuplicationCheckTask();
+        $task = new AddDuplicationCheckTaskBase();
         $task->run(self::TRAVIS_FILE);
         $this->assertExpectedFileContents(self::TRAVIS_FILE, 'testDuplicationExistingTravisFile.yml');
     }

@@ -4,12 +4,9 @@ namespace Suilven\PHPTravisEnhancer\Abstraction;
 
 use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
 
-abstract class AbstractTask
+abstract class TaskBase
 {
-    /**
-     * @return string
-     */
-    public abstract function getFlag();
+    abstract public function getFlag(): string;
 
 
     /**
@@ -39,7 +36,7 @@ abstract class AbstractTask
             if (isset($beforeScript)) {
                 // install jdscpd, node tool, for duplication detection
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
-                $yamlAsArray['before_script'][] = $prefix .  $beforeScript . '  ;fi';
+                $yamlAsArray['before_script'][] = $prefix . $beforeScript . '  ;fi';
             }
 
             $script = $this->getScript();
@@ -48,7 +45,6 @@ abstract class AbstractTask
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
                 $yamlAsArray['script'][] = $prefix . $this->getScript() . ' ; fi';
             }
-
         }
 
         $helper->saveTravis($yamlAsArray);
