@@ -7,6 +7,7 @@ use Suilven\PHPTravisEnhancer\AddPHPLintTask;
 
 class AddPHPLinkTaskTest extends TestCase
 {
+
     use CommonTestingMethods;
 
     private const TRAVIS_FILE = '.travis-phplint.yml';
@@ -23,7 +24,7 @@ class AddPHPLinkTaskTest extends TestCase
     {
         parent::tearDown();
 
-       $this->removeIfExists(self::TRAVIS_FILE);
+        $this->removeIfExists(self::TRAVIS_FILE);
     }
 
 

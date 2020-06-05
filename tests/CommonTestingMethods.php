@@ -2,8 +2,6 @@
 
 namespace Suilven\PHPTravisEnhancer\Tests;
 
-use PHPUnit\Framework\TestCase;
-
 trait CommonTestingMethods
 {
 

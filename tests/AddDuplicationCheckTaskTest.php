@@ -7,6 +7,7 @@ use Suilven\PHPTravisEnhancer\AddDuplicationCheckTask;
 
 class AddDuplicationCheckTaskTest extends TestCase
 {
+
     use CommonTestingMethods;
 
     private const TRAVIS_FILE = '.travis-duplicate.yml';
