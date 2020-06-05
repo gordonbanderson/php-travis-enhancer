@@ -23,8 +23,7 @@ class AddDuplicationCheckTask implements TaskInterface
 
     public function getScript()
     {
-       return 'if [[ $DUPLICATE_CODE_CHECK ]]; then node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd ' .
-           'tests ; fi';
+       return 'node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests';
     }
 
 
@@ -51,14 +50,11 @@ class AddDuplicationCheckTask implements TaskInterface
             $prefix = 'if [[ $' . $this->getFlag() .' ]]; then ';
             // install jdscpd, node tool, for duplication detection
             $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
-            $yamlAsArray['before_script'][] = $prefix .'sudo apt remove -y nodejs && curl '
-                . '-sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh '
-                . '&& sudo apt install -y build-essential nodejs && which npm && npm install jscpd@3.2.1  ;fi';
+            $yamlAsArray['before_script'][] = $prefix .  $this->getBeforeScript() . '  ;fi';
 
             // run jscpd on src and tests dir
             $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
-            $yamlAsArray['script'][] = $prefix . 'node_modules/jscpd/bin/jscpd src && '
-                . 'node_modules/jscpd/bin/jscpd tests ; fi';
+            $yamlAsArray['script'][] = $prefix . $this->getScript() . ' ; fi';
         }
 
         $helper->saveTravis($yamlAsArray);
