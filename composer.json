@@ -40,6 +40,7 @@
         "lint": "vendor/bin/parallel-lint src/ tests/",
         "phpstan": "vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/",
         "psalm": "vendor/bin/psalm --show-info=true",
-        "test": "vendor/bin/phpunit tests"
+        "test": "vendor/bin/phpunit tests",
+        "checkCode" : "composer checkcs && composer lint && composer psalm && composer phpstan"
     }
 }

@@ -2,10 +2,13 @@
 
 namespace Suilven\PHPTravisEnhancer\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Suilven\PHPTravisEnhancer\AddDuplicationCheckTask;
 
-class DuplicateCodeTest extends DeleteFileIfExistsTest
+class AddDuplicationCheckTaskTest extends TestCase
 {
+
+    use CommonTestingMethods;
 
     private const TRAVIS_FILE = '.travis-duplicate.yml';
 

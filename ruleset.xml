@@ -35,7 +35,7 @@
 	<rule ref="SlevomatCodingStandard.Classes.SuperfluousTraitNaming"/>
 	<rule ref="SlevomatCodingStandard.Classes.DisallowMultiConstantDefinition"/>
 
-	<!-- this failes even it is the only rule
+	<!-- this fails even it is the only rule
 	<rule ref="SlevomatCodingStandard.Classes.ClassMemberSpacing"/>
 	-->
 
@@ -145,7 +145,7 @@
 	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
 	-->
 	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
-	<!-- <rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/> -->
+	<rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
@@ -155,7 +155,7 @@
 	<rule ref="SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable"/>
 	<rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
 	<rule ref="SlevomatCodingStandard.Variables.UnusedVariable"/>
-	<!-- <rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/> -->
+	<rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>
 
 	<rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
 
