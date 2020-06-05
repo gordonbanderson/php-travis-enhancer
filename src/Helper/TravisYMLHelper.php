@@ -26,7 +26,8 @@ class TravisYMLHelper
      * Ensure that a hierarchy exists in a PHP array. Pass the hierarchy in the form matrix/include, this will populate
      * the path an empty leaf array
      *
-     * @param array<string> $yamlAsArray YAML file converted into an array. Can of course be any associative array
+     * @param array<string, string|array> $yamlAsArray YAML file converted into an array. Can of course be any
+     *          associative array
      * @param string $path The hierarchy required to exist, in the form matrix/include (forward slash separated)
      */
     public function ensurePathExistsInYaml(array &$yamlAsArray, string $path): void
@@ -48,7 +49,9 @@ class TravisYMLHelper
     /**
      * Check for an existing entry of the bash variable in the Travis matrix
      *
-     * @param array<array<array<array<string>>>> $yamlAsArray Yaml parsed into an array
+     * @todo What is the correct annotation to prevent this error?
+     * @psalm-suppress PossiblyInvalidArrayOffset
+     * @param array<string, string|array> $yamlAsArray Yaml parsed into an array
      * @param string $flag a bash variable flag, such as DUPLICATE_CHECK
      * @return bool true if an existing environment setting exists for this variable
      */
@@ -72,9 +75,9 @@ class TravisYMLHelper
      * Load the Travis file, or default to an empty array if it does not exist
      *
      * @todo Change this behavior?
-     * @return mixed The Travis YAML file as an array (note Symfony returns mixed)
+     * @return array<string, string|array> The Travis YAML file as an array (note Symfony returns mixed)
      */
-    public function loadTravis()
+    public function loadTravis(): array
     {
         $result = [];
         $path = \getcwd() . '/' . $this->travisFileName;
@@ -90,7 +93,7 @@ class TravisYMLHelper
      * Save a travis file, default .travis.yml, in the root of a project
      *
      * @todo How does one specifiy this as an associative array?
-     * @param array<string> $yamlArray an array that ought to have been formed from a YAML file
+     * @param array<string, string|array> $yamlArray an array that ought to have been formed from a YAML file
      */
     public function saveTravis(array $yamlArray): void
     {

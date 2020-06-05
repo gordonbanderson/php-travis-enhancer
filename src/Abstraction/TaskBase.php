@@ -13,11 +13,16 @@ abstract class TaskBase implements Task
     /**
      * Update Travis file to incorporate a check for duplicate code
      *
+     * @todo What is the correct annotation to prevent this error?
+     * @psalm-suppress PossiblyInvalidArrayOffset
+     * @psalm-suppress PossiblyNullOperand - nulls are checked for
      * @param string $travisFile An injectable filename (for testing), leave blank for default of .travis.yml
      */
     public function run(string $travisFile = '.travis.yml'): void
     {
         $helper = new TravisYMLHelper($travisFile);
+
+        /** @var array<string, string|array> $yamlAsArray */
         $yamlAsArray = $helper->loadTravis();
 
         $helper->ensurePathExistsInYaml($yamlAsArray, 'matrix/include');
