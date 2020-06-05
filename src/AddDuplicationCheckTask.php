@@ -5,7 +5,7 @@ namespace Suilven\PHPTravisEnhancer;
 use Suilven\PHPTravisEnhancer\Abstraction\TaskBase;
 use Suilven\PHPTravisEnhancer\IFace\Task;
 
-class AddDuplicationCheckTaskBase extends TaskBase implements Task
+class AddDuplicationCheckTask extends TaskBase implements Task
 {
     /** @return string bash variable for use in Travis script */
     public function getFlag(): string
