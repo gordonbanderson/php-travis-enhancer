@@ -4,7 +4,6 @@ namespace Suilven\PHPTravisEnhancer\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Suilven\PHPTravisEnhancer\AddPHPCSTask;
-use Suilven\PHPTravisEnhancer\AddPHPStanTask;
 
 class AddPHPCSTaskTest extends TestCase
 {
