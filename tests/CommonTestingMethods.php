@@ -5,6 +5,22 @@ namespace Suilven\PHPTravisEnhancer\Tests;
 trait CommonTestingMethods
 {
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->removeIfExists(self::TRAVIS_FILE);
+    }
+
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->removeIfExists(self::TRAVIS_FILE);
+    }
+
+
     public function testRemoveIfExists(): void
     {
         $filename = '.travis-to-rm';
