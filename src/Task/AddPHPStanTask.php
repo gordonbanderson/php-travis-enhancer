@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Suilven\PHPTravisEnhancer;
+namespace Suilven\PHPTravisEnhancer\Task;
 
 use Suilven\PHPTravisEnhancer\Abstraction\TaskBase;
 use Suilven\PHPTravisEnhancer\IFace\Task;
