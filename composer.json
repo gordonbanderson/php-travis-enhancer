@@ -42,5 +42,8 @@
         "psalm": "vendor/bin/psalm --show-info=true",
         "test": "vendor/bin/phpunit tests",
         "checkCode" : "composer checkcs && composer lint && composer psalm && composer phpstan"
-    }
+    },,
+    "bin": [
+        "bin/phpte"
+    ]
 }
