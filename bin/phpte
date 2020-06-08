@@ -9,6 +9,9 @@ if (is_file(__DIR__.'/../autoload.php') === true) {
     exit(1);
 }
 
+$runner = new \Suilven\PHPTravisEnhancer\Runner\Runner();
+$exitCode = $runner->run();
+exit($exitCode);
 /*
 $runner   = new PHP_CodeSniffer\Runner();
 $exitCode = $runner->runPHPCS();
