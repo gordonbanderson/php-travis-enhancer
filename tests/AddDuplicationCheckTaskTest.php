@@ -3,7 +3,7 @@
 namespace Suilven\PHPTravisEnhancer\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Suilven\PHPTravisEnhancer\AddDuplicationCheckTask;
+use Suilven\PHPTravisEnhancer\Task\AddDuplicationCheckTask;
 
 class AddDuplicationCheckTaskTest extends TestCase
 {

@@ -3,7 +3,7 @@
 namespace Suilven\PHPTravisEnhancer\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Suilven\PHPTravisEnhancer\AddPsalmTask;
+use Suilven\PHPTravisEnhancer\Task\AddPsalmTask;
 
 class AddPsalmTaskTest extends TestCase
 {
@@ -11,7 +11,7 @@ class AddPsalmTaskTest extends TestCase
     use CommonTestingMethods;
 
     private const TRAVIS_FILE = '.travis-psalm.yml';
-    
+
 
     public function testPsalmEmptyTravisFile(): void
     {

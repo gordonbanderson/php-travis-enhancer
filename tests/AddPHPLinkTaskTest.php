@@ -3,7 +3,7 @@
 namespace Suilven\PHPTravisEnhancer\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Suilven\PHPTravisEnhancer\AddPHPLintTask;
+use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
 
 class AddPHPLinkTaskTest extends TestCase
 {
