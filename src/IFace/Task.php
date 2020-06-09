@@ -29,5 +29,5 @@ interface Task
      *
      * @param string $travisFile The travis file to alter. This is overridden for testing purposes
      */
-    public function run(string $travisFile = '.travis.yml'): void;
+    public function run(string $travisFile = '.travis.yml'): int;
 }

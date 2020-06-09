@@ -5,9 +5,12 @@ namespace Suilven\PHPTravisEnhancer\Abstraction;
 use League\CLImate\CLImate;
 use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
 use Suilven\PHPTravisEnhancer\IFace\Task;
+use Suilven\PHPTravisEnhancer\Terminal\TerminalHelper;
 
 abstract class TaskBase implements Task
 {
+    use TerminalHelper;
+
     /** @var \League\CLImate\CLImate */
     private $climate;
 
@@ -24,15 +27,26 @@ abstract class TaskBase implements Task
 
 
     /**
-     * Update Travis file to incorporate a check for duplicate code
+     * Update Travis file to incorporate for the relevant task
      *
      * @todo What is the correct annotation to prevent this error?
      * @psalm-suppress PossiblyInvalidArrayOffset
      * @psalm-suppress PossiblyNullOperand - nulls are checked for
      * @param string $travisFile An injectable filename (for testing), leave blank for default of .travis.yml
+     *
+     * @return int 0 if task successful, error code if not
      */
-    public function run(string $travisFile = '.travis.yml'): void
+    public function run(string $travisFile = '.travis.yml'): int
     {
+        // install composer packages
+        $retVal = $this->installPackages();
+        if ($retVal) {
+            $this->climate->error('Packages could not be installed, not altering Travis or adding config files');
+            return $retVal;
+        }
+
+
+        // any alterations post composer failures should be successful
         $helper = new TravisYMLHelper($travisFile);
 
         /** @var array<string, string|array> $yamlAsArray */
@@ -48,6 +62,8 @@ abstract class TaskBase implements Task
                 'env' => $this->getFlag() . '=1',
             ];
 
+            $this->taskReport('Added env option: ' . $this->getFlag() . '=1');
+
             /** @var string $prefix the bash prefix to check for the flag being set */
             $prefix = 'if [[ $' . $this->getFlag() .' ]]; then ';
 
@@ -56,6 +72,8 @@ abstract class TaskBase implements Task
                 // install jdscpd, node tool, for duplication detection
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
                 $yamlAsArray['before_script'][] = $prefix . $beforeScript . '  ;fi';
+                $this->taskReport('Added before script: ' . $beforeScript);
+
             }
 
             $script = $this->getScript();
@@ -63,13 +81,16 @@ abstract class TaskBase implements Task
                 // run jscpd on src and tests dir
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'script');
                 $yamlAsArray['script'][] = $prefix . $script . ' ; fi';
+                $this->taskReport('Added script: ' . $script);
             }
         }
 
         $helper->saveTravis($yamlAsArray);
 
         $this->copyFiles();
-        $this->installPackages();
+
+        // signal success
+        return 1;
     }
 
 
@@ -90,16 +111,24 @@ abstract class TaskBase implements Task
     }
 
 
-    private function installPackages(): void
+    /**
+     * Install the composer packages for this task
+     *
+     * @return int 0 for no error, otherwise an error code
+     */
+    private function installPackages(): int
     {
+        $retVal = 999;
+
         $packages = $this->getComposerPackages();
         foreach ($packages as $package) {
             $cmd = 'composer --verbose --profile require --dev ' . $package;
-            \error_log($cmd);
             $output = [];
-            $retVal = -1;
             \exec($cmd, $output, $retVal);
             \error_log('RET VAl: ' . $retVal);
+            $this->taskReport('Installing ' . $package, $retVal);
         }
+
+        return $retVal;
     }
 }
