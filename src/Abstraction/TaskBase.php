@@ -54,5 +54,19 @@ abstract class TaskBase implements Task
         }
 
         $helper->saveTravis($yamlAsArray);
+
+        $this->copyFiles();
+    }
+
+
+    private function copyFiles()
+    {
+        $fileTransferArray = $this->filesToCopy();
+        foreach($fileTransferArray as $srcFile => $destFile)
+        {
+            $destFile = str_replace('SRC_DIR', 'src', $destFile);
+            $destFile = str_replace('TESTS_DIR', 'tests', $destFile);
+            error_log('Will copy ' . $srcFile . ' --> ' . $destFile);
+        }
     }
 }

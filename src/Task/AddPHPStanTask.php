@@ -26,10 +26,14 @@ class AddPHPStanTask extends TaskBase implements Task
     }
 
 
-    public function getComposerPackages()
+    public function getComposerPackages(): array
     {
         return ['phpstan/phpstan-strict-rules', 'phpstan/extension-installer'];
     }
 
     // @todo Copy the phpstan.neon config file
+    public function filesToCopy(): array
+    {
+        return ['files/phpstan.neon' => 'TESTS_DIR/phpstan.neon'];
+    }
 }

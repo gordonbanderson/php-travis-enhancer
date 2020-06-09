@@ -26,10 +26,14 @@ class AddPHPCSTask extends TaskBase implements Task
     }
 
 
-    public function getComposerPackages()
+    public function getComposerPackages(): array
     {
         return ['slevomat/coding-standard'];
     }
 
     // @todo Copy the ruleset.xml file
+    public function filesToCopy(): array
+    {
+        return ['files/ruleset.xml' => 'SRC_DIR/ruleset.xml'];
+    }
 }

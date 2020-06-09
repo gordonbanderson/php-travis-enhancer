@@ -68,6 +68,7 @@ class Runner
     {
         $this->climate->black('Trying to add coding standards check ');
         $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPCSTask();
+        $task->run();
     }
 
     private function addDuplicationCheck()
