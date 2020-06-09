@@ -2,6 +2,8 @@
 <?php
 /** Update Travis file to enhance coding standards */
 
+use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
+
 if (is_file(__DIR__.'/../autoload.php') === true) {
     include_once __DIR__.'/../autoload.php';
 } else {
@@ -9,10 +11,98 @@ if (is_file(__DIR__.'/../autoload.php') === true) {
     exit(1);
 }
 
+class Minimal extends \splitbrain\phpcli\CLI
+{
+    // register options and arguments
+    protected function setup(\splitbrain\phpcli\Options $options)
+    {
+        $options->setHelp('Add composer scripts locally and Travis tasks to improve the quality of your PHP code');
+        $options->registerOption('version', 'print version', 'v');
+
+        $options->registerOption('src-dir', 'Directory where the source code resides', 's');
+        $options->registerOption('test-dir', 'Directory where the test code resides', 't');
+
+        $options->registerCommand('phpcs', 'Add strict checking of your PHP codo using slevomat/coding-standard');
+        $options->registerCommand('phpstan', 'Add PHPStan auditing of your PHP code');
+        $options->registerCommand('lint', 'Run a linter over your PHP code');
+        $options->registerCommand('duplication', 'Add a check for duplicated code.  Keep things DRY');
+        $options->registerCommand('psalm', 'Add psalm checking to your PHP code');
+        $options->registerCommand('all', 'Apply all of the above');
+    }
+
+    // implement your code
+    protected function main2(\splitbrain\phpcli\Options $options)
+    {
+        if ($options->getOpt('version')) {
+            $this->info('1.0.0');
+        } else {
+            echo $options->help();
+        }
+    }
+
+
+    /**
+     * Your main program
+     *
+     * Arguments and options have been parsed when this is run
+     *
+     * @param Options $options
+     * @return void
+     */
+    protected function main(\splitbrain\phpcli\Options $options)
+    {
+
+        switch ($options->getCmd()) {
+            case 'phpstan':
+                $this->success('The PHPStan command was called');
+                $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPStanTask();
+                $task->run();
+                break;
+            case 'phplint':
+                $this->success('Adding PHP LINT check');
+                $task = new AddPHPLintTask();
+                $task->run();
+                break;
+            case 'cs':
+                $this->success('Adding slevomat coding standards check');
+                $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPCSTask();
+                $task->run();
+                break;
+            case 'phpstan':
+                $this->success('The PHPStan command was called');
+                $task = new AddPHPLintTask();
+                $task->run();
+                break;
+            case 'psalm':
+                $this->success('The psalm command was called');
+                $task = new \Suilven\PHPTravisEnhancer\Task\AddPsalmTask();
+                $task->run();
+                break;
+            case 'duplication':
+                $this->success('The duplication command was called');
+                break;
+            default:
+                $this->error('No known command was called, we show the default help instead:');
+                echo $options->help();
+                exit;
+        }
+
+        /**
+        $this->info('$options->getArgs():');
+        var_dump($options->getArgs());
+         */
+
+    }
+}
+// execute it
+$cli = new Minimal();
+$cli->run();
+
+/*
 $runner = new \Suilven\PHPTravisEnhancer\Runner\Runner();
 $exitCode = $runner->run();
 exit($exitCode);
-/*
+
 $runner   = new PHP_CodeSniffer\Runner();
 $exitCode = $runner->runPHPCS();
 exit($exitCode);

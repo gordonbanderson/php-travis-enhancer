@@ -9,6 +9,6 @@ class Runner
 {
     public function run() {
         $climate = new CLImate();
-        $climate->backgroundCyan('YO!');
+        $climate->bold('PHP Travis Enhancer - Audit Your Code To The Max');
     }
 }
