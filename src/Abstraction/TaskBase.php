@@ -8,13 +8,15 @@ use Suilven\PHPTravisEnhancer\IFace\Task;
 
 abstract class TaskBase implements Task
 {
-    abstract public function getFlag(): string;
-
     private $climate;
 
-    public function __construct__()
+    abstract public function getFlag(): string;
+
+
+    public function __construct__(): void
     {
         parent::__construct__();
+
         $this->climate = new CLImate();
     }
 
@@ -69,34 +71,33 @@ abstract class TaskBase implements Task
     }
 
 
-    private function copyFiles()
+    private function copyFiles(): void
     {
         $fileTransferArray = $this->filesToCopy();
-        foreach($fileTransferArray as $srcFile => $destFile)
-        {
-            $destFile = str_replace('SRC_DIR', 'src', $destFile);
-            $destFile = str_replace('TESTS_DIR', 'tests', $destFile);
-            error_log('Will copy ' . $srcFile . ' --> ' . $destFile);
+        foreach ($fileTransferArray as $srcFile => $destFile) {
+            $destFile = \str_replace('SRC_DIR', 'src', $destFile);
+            $destFile = \str_replace('TESTS_DIR', 'tests', $destFile);
+            \error_log('Will copy ' . $srcFile . ' --> ' . $destFile);
 
-            error_log(__DIR__);
+            \error_log(__DIR__);
 
             // @todo Replace YOUR_PROJECT with composer project name
-            $contents = file_get_contents(__DIR__ . '/../../' . $srcFile);
-            file_put_contents(getcwd() . '/' . $destFile, $contents);
+            $contents = \file_get_contents(__DIR__ . '/../../' . $srcFile);
+            \file_put_contents(\getcwd() . '/' . $destFile, $contents);
         }
     }
 
-    private function installPackages()
+
+    private function installPackages(): void
     {
         $packages = $this->getComposerPackages();
-        foreach($packages as $package)
-        {
+        foreach ($packages as $package) {
             $cmd = 'composer --verbose --profile require --dev ' . $package;
-            error_log($cmd);
+            \error_log($cmd);
             $output = [];
             $retVal = -1;
-            exec($cmd, $output, $retVal);
-            error_log('RET VAl: ' . $retVal);
+            \exec($cmd, $output, $retVal);
+            \error_log('RET VAl: ' . $retVal);
         }
     }
 }

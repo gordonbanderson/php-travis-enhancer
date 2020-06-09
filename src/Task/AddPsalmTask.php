@@ -31,6 +31,7 @@ class AddPsalmTask extends TaskBase implements Task
         return ['vimeo/psalm'];
     }
 
+
     public function filesToCopy(): array
     {
         return [];

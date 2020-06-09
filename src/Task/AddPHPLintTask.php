@@ -31,6 +31,7 @@ class AddPHPLintTask extends TaskBase implements Task
         return ['php-parallel-lint/php-parallel-lint', 'php-parallel-lint/php-console-highlighter'];
     }
 
+
     public function filesToCopy(): array
     {
         return [];
