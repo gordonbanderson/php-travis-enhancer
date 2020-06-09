@@ -20,7 +20,7 @@ interface Task
     public function getComposerPackages(): array;
 
 
-    /** @return array<string> associative array of src -> dest */
+    /** @return array<string, string> associative array of src -> dest */
     public function filesToCopy(): array;
 
 

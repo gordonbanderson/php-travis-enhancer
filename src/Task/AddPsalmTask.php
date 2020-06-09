@@ -26,12 +26,14 @@ class AddPsalmTask extends TaskBase implements Task
     }
 
 
+    /** @return array<string> */
     public function getComposerPackages(): array
     {
         return ['vimeo/psalm'];
     }
 
 
+    /** @return array<string, string> */
     public function filesToCopy(): array
     {
         return [];

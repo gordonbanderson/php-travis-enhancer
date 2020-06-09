@@ -26,12 +26,14 @@ class AddPHPLintTask extends TaskBase implements Task
     }
 
 
+    /** @return array<string> */
     public function getComposerPackages(): array
     {
         return ['php-parallel-lint/php-parallel-lint', 'php-parallel-lint/php-console-highlighter'];
     }
 
 
+    /** @return array<string, string> */
     public function filesToCopy(): array
     {
         return [];

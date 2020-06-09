@@ -3,6 +3,7 @@
 namespace Suilven\PHPTravisEnhancer\Runner;
 
 use League\CLImate\CLImate;
+use splitbrain\phpcli\Options;
 use Suilven\PHPTravisEnhancer\Task\AddDuplicationCheckTask;
 use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
 
@@ -16,13 +17,11 @@ class Runner
         $this->climate = new CLImate();
     }
 
-    /** @var \Suilven\PHPTravisEnhancer\Runner\Options $options */
 
-    public function run($options): void
+    public function run(Options $options): void
     {
         $this->climate->bold('PHP Travis Enhancer - Audit Your Code To The Max');
 
-        \var_dump($options);
         $this->climate->black()->bold('COMMANDS:');
         $this->climate->green($options->getCmd());
 
@@ -38,7 +37,6 @@ class Runner
                 break;
             case 'cs':
                 $this->addCodingStandardsCheck();
-                $task->run();
 
                 break;
             case 'psalm':
@@ -58,8 +56,8 @@ class Runner
 
                 break;
             default:
-                $this->error('No known command was called, we show the default help instead:');
-                //echo $options->help();
+                $this->climate->red('No known command was called, we show the default help instead:');
+                echo $options->help();
                 exit;
         }
     }

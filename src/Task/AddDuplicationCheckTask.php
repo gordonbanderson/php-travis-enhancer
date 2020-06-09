@@ -28,12 +28,14 @@ class AddDuplicationCheckTask extends TaskBase implements Task
     }
 
 
+    /** @return array<string> */
     public function getComposerPackages(): array
     {
         return [];
     }
 
 
+    /** @return array<string, string> */
     public function filesToCopy(): array
     {
         return [];

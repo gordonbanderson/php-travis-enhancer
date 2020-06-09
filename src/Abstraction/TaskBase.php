@@ -8,15 +8,17 @@ use Suilven\PHPTravisEnhancer\IFace\Task;
 
 abstract class TaskBase implements Task
 {
+    /** @var \League\CLImate\CLImate */
     private $climate;
 
     abstract public function getFlag(): string;
 
 
-    public function __construct__(): void
+    /**
+     * TaskBase constructor.
+     */
+    public function __construct()
     {
-        parent::__construct__();
-
         $this->climate = new CLImate();
     }
 
