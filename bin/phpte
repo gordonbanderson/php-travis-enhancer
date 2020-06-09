@@ -4,8 +4,8 @@
 
 use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
 
-if (is_file(__DIR__.'/../autoload.php') === true) {
-    include_once __DIR__.'/../autoload.php';
+if (is_file(__DIR__.'/../../../autoload.php') === true) {
+    include_once __DIR__.'/../../../autoload.php';
 } else {
     error_log('ERROR: Autoload file could not be found');
     exit(1);
