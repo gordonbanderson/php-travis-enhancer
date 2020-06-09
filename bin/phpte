@@ -51,46 +51,10 @@ class Minimal extends \splitbrain\phpcli\CLI
      */
     protected function main(\splitbrain\phpcli\Options $options)
     {
+        $runner = new \Suilven\PHPTravisEnhancer\Runner\Runner();
+        $exitCode = $runner->run($options);
+        exit($exitCode);
 
-        switch ($options->getCmd()) {
-            case 'phpstan':
-                $this->success('The PHPStan command was called');
-                $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPStanTask();
-                $task->run();
-                break;
-            case 'phplint':
-                $this->success('Adding PHP LINT check');
-                $task = new AddPHPLintTask();
-                $task->run();
-                break;
-            case 'cs':
-                $this->success('Adding slevomat coding standards check');
-                $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPCSTask();
-                $task->run();
-                break;
-            case 'phpstan':
-                $this->success('The PHPStan command was called');
-                $task = new AddPHPLintTask();
-                $task->run();
-                break;
-            case 'psalm':
-                $this->success('The psalm command was called');
-                $task = new \Suilven\PHPTravisEnhancer\Task\AddPsalmTask();
-                $task->run();
-                break;
-            case 'duplication':
-                $this->success('The duplication command was called');
-                break;
-            default:
-                $this->error('No known command was called, we show the default help instead:');
-                echo $options->help();
-                exit;
-        }
-
-        /**
-        $this->info('$options->getArgs():');
-        var_dump($options->getArgs());
-         */
 
     }
 }
@@ -98,12 +62,3 @@ class Minimal extends \splitbrain\phpcli\CLI
 $cli = new Minimal();
 $cli->run();
 
-/*
-$runner = new \Suilven\PHPTravisEnhancer\Runner\Runner();
-$exitCode = $runner->run();
-exit($exitCode);
-
-$runner   = new PHP_CodeSniffer\Runner();
-$exitCode = $runner->runPHPCS();
-exit($exitCode);
-*/
