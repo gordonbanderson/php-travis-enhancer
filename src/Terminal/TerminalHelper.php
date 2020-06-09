@@ -9,7 +9,7 @@ trait TerminalHelper
      */
     private function tick(): void
     {
-        $this->climate->bold()->darkGreen('✓');
+        $this->climate->green('✓');
     }
 
 

@@ -44,7 +44,7 @@ abstract class TaskBase implements Task
 
         // install composer packages
         $retVal = $this->installPackages();
-        if ($retVal) {
+        if ($retVal !== 0) {
             $this->climate->error('Packages could not be installed, not altering Travis or adding config files');
 
             return $retVal;
