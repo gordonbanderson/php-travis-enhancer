@@ -14,6 +14,12 @@ class AddPHPLintTask extends TaskBase implements Task
     }
 
 
+    public function getCommand(): string {
+        return 'lint';
+    }
+
+
+
     public function getBeforeScript(): ?string
     {
         return null;

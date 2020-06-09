@@ -13,6 +13,10 @@ class AddDuplicationCheckTask extends TaskBase implements Task
         return 'DUPLICATE_CODE_CHECK';
     }
 
+    public function getCommand(): string {
+        return 'duplication';
+    }
+
 
     public function getBeforeScript(): ?string
     {

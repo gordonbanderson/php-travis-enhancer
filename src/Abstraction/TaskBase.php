@@ -38,6 +38,10 @@ abstract class TaskBase implements Task
      */
     public function run(string $travisFile = '.travis.yml'): int
     {
+        $this->climate->border();
+        $this->climate->info('Adding ' . $this->getCommand());
+        $this->climate->border();
+
         // install composer packages
         $retVal = $this->installPackages();
         if ($retVal) {
@@ -89,6 +93,8 @@ abstract class TaskBase implements Task
 
         $this->copyFiles();
 
+        $this->climate->br(4);
+
         // signal success
         return 1;
     }
@@ -100,13 +106,12 @@ abstract class TaskBase implements Task
         foreach ($fileTransferArray as $srcFile => $destFile) {
             $destFile = \str_replace('SRC_DIR', 'src', $destFile);
             $destFile = \str_replace('TESTS_DIR', 'tests', $destFile);
-            \error_log('Will copy ' . $srcFile . ' --> ' . $destFile);
-
-            \error_log(__DIR__);
 
             // @todo Replace YOUR_PROJECT with composer project name
             $contents = \file_get_contents(__DIR__ . '/../../' . $srcFile);
             \file_put_contents(\getcwd() . '/' . $destFile, $contents);
+
+            $this->taskReport('Copied ' . $srcFile . ' to ' . $destFile);
         }
     }
 
@@ -118,16 +123,19 @@ abstract class TaskBase implements Task
      */
     private function installPackages(): int
     {
-        $retVal = 999;
+        $retVal = 0;
 
         $packages = $this->getComposerPackages();
-        foreach ($packages as $package) {
-            $cmd = 'composer --verbose --profile require --dev ' . $package;
-            $output = [];
-            \exec($cmd, $output, $retVal);
-            \error_log('RET VAl: ' . $retVal);
-            $this->taskReport('Installing ' . $package, $retVal);
+        if (sizeof($packages ) > 0) {
+            foreach ($packages as $package) {
+                $cmd = 'composer --verbose --profile require --dev ' . $package;
+                $output = [];
+                \exec($cmd, $output, $retVal);
+                \error_log('RET VAl: ' . $retVal);
+                $this->taskReport('Installing ' . $package, $retVal);
+            }
         }
+
 
         return $retVal;
     }
