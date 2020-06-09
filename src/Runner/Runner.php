@@ -3,11 +3,11 @@
 namespace Suilven\PHPTravisEnhancer\Runner;
 
 use League\CLImate\CLImate;
-use Symfony\Component\Yaml\Yaml;
 
 class Runner
 {
-    public function run() {
+    public function run(): void
+    {
         $climate = new CLImate();
         $climate->bold('PHP Travis Enhancer - Audit Your Code To The Max');
     }
