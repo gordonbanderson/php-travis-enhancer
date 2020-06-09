@@ -24,4 +24,10 @@ class AddPsalmTask extends TaskBase implements Task
     {
         return './vendor/bin/psalm --show-info=true;';
     }
+
+
+    public function getComposerPackages()
+    {
+        return ['vimeo/psalm'];
+    }
 }

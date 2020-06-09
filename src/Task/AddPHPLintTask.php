@@ -24,4 +24,10 @@ class AddPHPLintTask extends TaskBase implements Task
     {
         return 'vendor/bin/parallel-lint src/ tests/';
     }
+
+
+    public function getComposerPackages()
+    {
+        return ['php-parallel-lint/php-parallel-lint', 'php-parallel-lint/php-console-highlighter'];
+    }
 }

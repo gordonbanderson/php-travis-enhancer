@@ -15,6 +15,8 @@ interface Task
     /** @return string|null bash code to go in the script section, null if not required */
     public function getScript(): ?string;
 
+    /** @return array<string> list of composer packages to install */
+    public function getComposerPackages(): array
 
     /**
      * Execute the task of altering the Travis file

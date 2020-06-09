@@ -26,4 +26,10 @@ class AddDuplicationCheckTask extends TaskBase implements Task
     {
         return 'node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests';
     }
+
+
+    public function getComposerPackages()
+    {
+        return [];
+    }
 }

@@ -10,49 +10,91 @@ use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
 class Runner
 {
     /**
+     * @var CLImate
+     */
+    private $climate;
+
+    public function __construct()
+    {
+        $this->climate = new CLImate();
+    }
+
+    /**
      * @var Options $options
      */
 
     public function run($options): void
     {
-        $climate = new CLImate();
-        $climate->bold('PHP Travis Enhancer - Audit Your Code To The Max');
+        $this->climate->bold('PHP Travis Enhancer - Audit Your Code To The Max');
 
         var_dump($options);
-        $climate->black()->bold('COMMANDS:');
-        $climate->green($options->getCmd());
+        $this->climate->black()->bold('COMMANDS:');
+        $this->climate->green($options->getCmd());
 
 
         switch ($options->getCmd()) {
             case 'phpstan':
-                $climate->black('Trying to add PHPStan ');
-                $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPStanTask();
-                $task->run();
+                $this->addPhpStan();
                 break;
             case 'lint':
-                $climate->black('Trying to add linting ');
-                $task = new AddPHPLintTask();
-                $task->run();
+                $this->addPhpLint();
                 break;
             case 'cs':
-                $climate->black('Trying to add coding standards check ');
-                $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPCSTask();
+                $this->addCodingStandardsCheck();
                 $task->run();
                 break;
             case 'psalm':
-                $climate->black('Trying to add Psalm ');
-                $task = new \Suilven\PHPTravisEnhancer\Task\AddPsalmTask();
-                $task->run();
+                $this->addPsalm();
                 break;
             case 'duplication':
-                $climate->black('Trying to add duplication checker ');
-                $task = new AddDuplicationCheckTask();
-                $task->run();
+                $this->addDuplicationCheck();
+                break;
+            case 'all':
+                $this->addCodingStandardsCheck();
+                $this->addDuplicationCheck();
+                $this->addPhpLint();
+                $this->addPhpStan();
+                $this->addPsalm();
                 break;
             default:
                 $this->error('No known command was called, we show the default help instead:');
                 //echo $options->help();
                 exit;
         }
+    }
+
+
+    private function addCodingStandardsCheck()
+    {
+        $this->climate->black('Trying to add coding standards check ');
+        $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPCSTask();
+    }
+
+    private function addDuplicationCheck()
+    {
+        $this->climate->black('Trying to add duplication checker ');
+        $task = new AddDuplicationCheckTask();
+        $task->run();
+    }
+
+    private function addPhpLint()
+    {
+        $this->climate->black('Trying to add linting ');
+        $task = new AddPHPLintTask();
+        $task->run();
+    }
+
+    private function addPhpStan()
+    {
+        $this->climate->black('Trying to add PHPStan ');
+        $task = new \Suilven\PHPTravisEnhancer\Task\AddPHPStanTask();
+        $task->run();
+    }
+
+    private function addPsalm()
+    {
+        $this->climate->black('Trying to add Psalm ');
+        $task = new \Suilven\PHPTravisEnhancer\Task\AddPsalmTask();
+        $task->run();
     }
 }

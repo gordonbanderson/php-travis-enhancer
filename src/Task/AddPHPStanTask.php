@@ -25,5 +25,11 @@ class AddPHPStanTask extends TaskBase implements Task
         return 'vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/;';
     }
 
+
+    public function getComposerPackages()
+    {
+        return ['phpstan/phpstan-strict-rules', 'phpstan/extension-installer'];
+    }
+
     // @todo Copy the phpstan.neon config file
 }

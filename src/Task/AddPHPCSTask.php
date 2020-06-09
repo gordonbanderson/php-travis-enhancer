@@ -25,5 +25,11 @@ class AddPHPCSTask extends TaskBase implements Task
         return 'vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests';
     }
 
+
+    public function getComposerPackages()
+    {
+        return ['slevomat/coding-standard'];
+    }
+
     // @todo Copy the ruleset.xml file
 }
