@@ -9,6 +9,7 @@ use Suilven\PHPTravisEnhancer\Terminal\TerminalHelper;
 
 abstract class TaskBase implements Task
 {
+
     use TerminalHelper;
 
     /** @var \League\CLImate\CLImate */
@@ -33,7 +34,6 @@ abstract class TaskBase implements Task
      * @psalm-suppress PossiblyInvalidArrayOffset
      * @psalm-suppress PossiblyNullOperand - nulls are checked for
      * @param string $travisFile An injectable filename (for testing), leave blank for default of .travis.yml
-     *
      * @return int 0 if task successful, error code if not
      */
     public function run(string $travisFile = '.travis.yml'): int
@@ -46,6 +46,7 @@ abstract class TaskBase implements Task
         $retVal = $this->installPackages();
         if ($retVal) {
             $this->climate->error('Packages could not be installed, not altering Travis or adding config files');
+
             return $retVal;
         }
 
@@ -77,7 +78,6 @@ abstract class TaskBase implements Task
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
                 $yamlAsArray['before_script'][] = $prefix . $beforeScript . '  ;fi';
                 $this->taskReport('Added before script: ' . $beforeScript);
-
             }
 
             $script = $this->getScript();
@@ -126,7 +126,7 @@ abstract class TaskBase implements Task
         $retVal = 0;
 
         $packages = $this->getComposerPackages();
-        if (sizeof($packages ) > 0) {
+        if (\sizeof($packages) > 0) {
             foreach ($packages as $package) {
                 $cmd = 'composer --verbose --profile require --dev ' . $package;
                 $output = [];
@@ -135,7 +135,6 @@ abstract class TaskBase implements Task
                 $this->taskReport('Installing ' . $package, $retVal);
             }
         }
-
 
         return $retVal;
     }

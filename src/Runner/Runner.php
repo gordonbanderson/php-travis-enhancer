@@ -30,7 +30,7 @@ class Runner
             $progress->current($i);
 
             // Simulate something happening
-            usleep(800);
+            \usleep(800);
         }
 
         $this->climate->inline('Doing some task ');
@@ -38,7 +38,6 @@ class Runner
 
         $this->climate->inline('Doing another task ');
         $this->cross();
-
     }
 
 
@@ -126,12 +125,15 @@ class Runner
         $task->run();
     }
 
-    private function tick()
+
+    private function tick(): void
     {
         $this->climate->bold()->darkGreen('✓');
     }
 
-    private function cross()
+
+    private function cross(): void
     {
-        $this->climate->bold()->red('✘');    }
+        $this->climate->bold()->red('✘');
+    }
 }

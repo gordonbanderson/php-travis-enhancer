@@ -7,6 +7,7 @@ interface Task
     /** @return string a flag, such as PHP_STAN or DUPLICATE_CHECK */
     public function getFlag(): string;
 
+
     /** @return string the command line name of the task, such as phpcs or lint */
     public function getCommand(): string;
 

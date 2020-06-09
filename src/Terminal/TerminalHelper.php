@@ -2,17 +2,12 @@
 
 namespace Suilven\PHPTravisEnhancer\Terminal;
 
-use League\CLImate\CLImate;
-use splitbrain\phpcli\Options;
-use Suilven\PHPTravisEnhancer\Task\AddDuplicationCheckTask;
-use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
-
 trait TerminalHelper
 {
     /**
      * Render a green tick in the terminal
      */
-    private function tick()
+    private function tick(): void
     {
         $this->climate->bold()->darkGreen('✓');
     }
@@ -21,17 +16,13 @@ trait TerminalHelper
     /**
      * Render a red cross in the terminial
      */
-    private function cross()
+    private function cross(): void
     {
         $this->climate->bold()->red('✘');
     }
 
 
-    /**
-     * @param string $message
-     * @param int $retVal
-     */
-    private function taskReport($message, $retVal = 0)
+    private function taskReport(string $message, int $retVal = 0): void
     {
         $this->climate->inline($message . '  ');
         if ($retVal !== 0) {

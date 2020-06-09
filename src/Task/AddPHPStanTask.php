@@ -13,10 +13,11 @@ class AddPHPStanTask extends TaskBase implements Task
         return 'PHPSTAN_TEST';
     }
 
-    public function getCommand(): string {
+
+    public function getCommand(): string
+    {
         return 'phpstan';
     }
-
 
 
     public function getBeforeScript(): ?string

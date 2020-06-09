@@ -13,10 +13,11 @@ class AddPsalmTask extends TaskBase implements Task
         return 'PSALM_TEST';
     }
 
-    public function getCommand(): string {
+
+    public function getCommand(): string
+    {
         return 'psalm';
     }
-
 
 
     public function getBeforeScript(): ?string
