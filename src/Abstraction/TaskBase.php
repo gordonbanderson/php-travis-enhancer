@@ -2,12 +2,21 @@
 
 namespace Suilven\PHPTravisEnhancer\Abstraction;
 
+use League\CLImate\CLImate;
 use Suilven\PHPTravisEnhancer\Helper\TravisYMLHelper;
 use Suilven\PHPTravisEnhancer\IFace\Task;
 
 abstract class TaskBase implements Task
 {
     abstract public function getFlag(): string;
+
+    private $climate;
+
+    public function __construct__()
+    {
+        parent::__construct__();
+        $this->climate = new CLImate();
+    }
 
 
     /**
@@ -56,6 +65,7 @@ abstract class TaskBase implements Task
         $helper->saveTravis($yamlAsArray);
 
         $this->copyFiles();
+        $this->installPackages();
     }
 
 
@@ -67,6 +77,26 @@ abstract class TaskBase implements Task
             $destFile = str_replace('SRC_DIR', 'src', $destFile);
             $destFile = str_replace('TESTS_DIR', 'tests', $destFile);
             error_log('Will copy ' . $srcFile . ' --> ' . $destFile);
+
+            error_log(__DIR__);
+
+            // @todo Replace YOUR_PROJECT with composer project name
+            $contents = file_get_contents(__DIR__ . '/../../' . $srcFile);
+            file_put_contents(getcwd() . '/' . $destFile, $contents);
+        }
+    }
+
+    private function installPackages()
+    {
+        $packages = $this->getComposerPackages();
+        foreach($packages as $package)
+        {
+            $cmd = 'composer --verbose --profile require --dev ' . $package;
+            error_log($cmd);
+            $output = [];
+            $retVal = -1;
+            exec($cmd, $output, $retVal);
+            error_log('RET VAl: ' . $retVal);
         }
     }
 }
