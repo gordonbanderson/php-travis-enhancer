@@ -32,13 +32,6 @@ class Runner
             // Simulate something happening
             usleep(800);
         }
-
-        $this->climate->inline('Doing some task ');
-        $this->tick();
-
-        $this->climate->inline('Doing another task ');
-        $this->cross();
-
     }
 
 
@@ -125,13 +118,4 @@ class Runner
         $task = new \Suilven\PHPTravisEnhancer\Task\AddPsalmTask();
         $task->run();
     }
-
-    private function tick()
-    {
-        $this->climate->bold()->darkGreen('✓');
-    }
-
-    private function cross()
-    {
-        $this->climate->bold()->red('✘');    }
 }
