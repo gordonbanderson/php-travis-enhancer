@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Suilven-RandomEnglish">
+<ruleset name="YOUR_PROJECT">
 	<config name="installed_paths" value="../../slevomat/coding-standard"/><!-- relative path from PHPCS source location -->
 
 	<rule ref="PSR2"/>
@@ -55,12 +55,9 @@
 	<rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations" />
 
 
-
-
-
-
 	<rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
 	<rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn"/>
+
 	<rule ref="SlevomatCodingStandard.ControlStructures.DisallowShortTernaryOperator"/>
 	<rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
 	<rule ref="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>

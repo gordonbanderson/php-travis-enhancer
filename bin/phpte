@@ -1,0 +1,64 @@
+#!/usr/bin/env php
+<?php
+/** Update Travis file to enhance coding standards */
+
+use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
+
+if (is_file(__DIR__.'/../../../autoload.php') === true) {
+    include_once __DIR__.'/../../../autoload.php';
+} else {
+    error_log('ERROR: Autoload file could not be found');
+    exit(1);
+}
+
+class Minimal extends \splitbrain\phpcli\CLI
+{
+    // register options and arguments
+    protected function setup(\splitbrain\phpcli\Options $options)
+    {
+        $options->setHelp('Add composer scripts locally and Travis tasks to improve the quality of your PHP code');
+        $options->registerOption('version', 'print version', 'v');
+
+        $options->registerOption('src-dir', 'Directory where the source code resides', 's');
+        $options->registerOption('test-dir', 'Directory where the test code resides', 't');
+
+        $options->registerCommand('phpcs', 'Add strict checking of your PHP codo using slevomat/coding-standard');
+        $options->registerCommand('phpstan', 'Add PHPStan auditing of your PHP code');
+        $options->registerCommand('lint', 'Run a linter over your PHP code');
+        $options->registerCommand('duplication', 'Add a check for duplicated code.  Keep things DRY');
+        $options->registerCommand('psalm', 'Add psalm checking to your PHP code');
+        $options->registerCommand('all', 'Apply all of the above');
+    }
+
+    // implement your code
+    protected function main2(\splitbrain\phpcli\Options $options)
+    {
+        if ($options->getOpt('version')) {
+            $this->info('1.0.0');
+        } else {
+            echo $options->help();
+        }
+    }
+
+
+    /**
+     * Your main program
+     *
+     * Arguments and options have been parsed when this is run
+     *
+     * @param Options $options
+     * @return void
+     */
+    protected function main(\splitbrain\phpcli\Options $options)
+    {
+        $runner = new \Suilven\PHPTravisEnhancer\Runner\Runner();
+        $exitCode = $runner->run($options);
+        exit($exitCode);
+
+
+    }
+}
+// execute it
+$cli = new Minimal();
+$cli->run();
+
