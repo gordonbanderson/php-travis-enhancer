@@ -52,7 +52,7 @@ class AddPHPCSTask extends TaskBase implements Task
     /** @return array<string, string> */
     public function filesToCopy(): array
     {
-        return ['files/ruleset.xml' => 'SRC_DIR/ruleset.xml'];
+        return ['files/ruleset.xml' => 'ruleset.xml'];
     }
 
 
