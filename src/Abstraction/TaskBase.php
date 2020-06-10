@@ -149,28 +149,29 @@ abstract class TaskBase implements Task
 
     private function addScriptsToComposerJSON(): void
     {
-        $composerFile = getcwd() . '/composer.json';
-        $contents = file_get_contents($composerFile);
-        $json = json_decode($contents, true);
+        $composerFile = \getcwd() . '/composer.json';
+        $contents = \file_get_contents($composerFile);
+        $json = \json_decode($contents, true);
         if (!isset($json['scripts'])) {
             $json['scripts'] = [];
         }
         $scriptsInJSON = $json['scripts'];
-        $existingScriptNames = array_keys($scriptsInJSON);
-        error_log(print_r($existingScriptNames, true));
+        $existingScriptNames = \array_keys($scriptsInJSON);
+        \error_log(\print_r($existingScriptNames, true));
 
         $this->climate->info('COmposer file: ' . $composerFile);
         /** @var array<string,string> $scripts */
         $scripts = $this->getComposerScripts();
 
         $this->climate->border();
-        error_log(print_r($scriptsInJSON, true));
+        \error_log(\print_r($scriptsInJSON, true));
         $this->climate->border();
 
         foreach ($scripts as $scriptName => $bashCode) {
             $this->climate->out('Adding script ' . $scriptName . ' --> ' . $bashCode);
-            if (!isset($existingScriptNames[$scriptName])) {
-                $scriptsInJSON[$scriptName] = $bashCode;;
+            if (!\in_array($scriptName, $existingScriptNames, true)) {
+                $scriptsInJSON[$scriptName] = $bashCode;
+                ;
             } else {
                 $this->climate->error('Script ' . $scriptName . ' already exists');
             }
@@ -181,10 +182,10 @@ abstract class TaskBase implements Task
             self::$codeCheckCommands[] = 'composer ' . $scriptName;
         }
 
-        $scriptsInJSON['checkCode'] = implode(' && ', self::$codeCheckCommands);
+        $scriptsInJSON['checkCode'] = \implode(' && ', self::$codeCheckCommands);
 
         $json['scripts'] = $scriptsInJSON;
-        $contents = json_encode($json, JSON_PRETTY_PRINT);
-        file_put_contents($composerFile, $contents);
+        $contents = \json_encode($json, \JSON_PRETTY_PRINT);
+        \file_put_contents($composerFile, $contents);
     }
 }
