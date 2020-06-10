@@ -33,7 +33,7 @@ class AddPsalmTask extends TaskBase implements Task
 
 
     /** @return array<string,string> */
-    public function getComposerScript(): array
+    public function getComposerScripts(): array
     {
         return ["psalm" =>"vendor/bin/psalm --show-info=true"];
     }

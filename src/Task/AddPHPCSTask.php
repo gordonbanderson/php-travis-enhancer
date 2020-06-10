@@ -33,7 +33,7 @@ class AddPHPCSTask extends TaskBase implements Task
 
 
     /** @return array<string,string> */
-    public function getComposerScript(): array
+    public function getComposerScripts(): array
     {
         return [
             "checkcs"=> "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",

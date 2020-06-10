@@ -21,7 +21,7 @@ interface Task
 
 
     /** @return array<string,string> names of composer script command mapped to the bash code to execute. */
-    public function getComposerScript(): array;
+    public function getComposerScripts(): array;
 
 
     /** @return array<string> list of composer packages to install */

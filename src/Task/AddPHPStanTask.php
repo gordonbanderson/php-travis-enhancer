@@ -33,7 +33,7 @@ class AddPHPStanTask extends TaskBase implements Task
 
 
     /** @return array<string,string> */
-    public function getComposerScript(): array
+    public function getComposerScripts(): array
     {
         return ["phpstan" => "vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/"];
     }
