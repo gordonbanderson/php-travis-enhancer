@@ -19,9 +19,8 @@ interface Task
     /** @return string|null bash code to go in the script section, null if not required */
     public function getTravisScript(): ?string;
 
-    /** @return array<string,string> name of composer script command mapped to the bash code to execute.  Empty
-     * array if not required
-     */
+
+    /** @return array<string,string> names of composer script command mapped to the bash code to execute. */
     public function getComposerScript(): array;
 
 

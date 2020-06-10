@@ -31,6 +31,8 @@ class AddPHPCSTask extends TaskBase implements Task
         return 'vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests';
     }
 
+
+    /** @return array<string,string> */
     public function getComposerScript(): array
     {
         return [
