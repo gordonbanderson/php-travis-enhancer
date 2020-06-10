@@ -28,7 +28,7 @@ class AddPHPStanTask extends TaskBase implements Task
 
     public function getTravisScript(): ?string
     {
-        return 'vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/;';
+        return 'vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/';
     }
 
 
