@@ -6,9 +6,14 @@ use League\CLImate\CLImate;
 use splitbrain\phpcli\Options;
 use Suilven\PHPTravisEnhancer\Task\AddDuplicationCheckTask;
 use Suilven\PHPTravisEnhancer\Task\AddPHPLintTask;
+use Suilven\PHPTravisEnhancer\Terminal\TerminalHelper;
 
 class Runner
 {
+
+    use TerminalHelper;
+
+
     /** @var \League\CLImate\CLImate */
     private $climate;
 
@@ -16,22 +21,7 @@ class Runner
     {
         $this->climate = new CLImate();
         $this->climate->clear();
-        $this->climate->out('RUNNER');
-        $this->climate->error('Ruh roh.');
-        $this->climate->border();
-        $this->climate->comment('Just so you know.');
-        $this->climate->whisper('Not so important, just a heads up.');
-        $this->climate->shout('This. This is important.');
-        $this->climate->info('Nothing fancy here. Just some info.');
 
-        $progress = $this->climate->progress()->total(100);
-
-        for ($i = 0; $i <= 100; $i++) {
-            $progress->current($i);
-
-            // Simulate something happening
-            usleep(800);
-        }
     }
 
 

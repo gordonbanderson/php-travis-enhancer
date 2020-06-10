@@ -14,10 +14,10 @@ class AddPHPCSTask extends TaskBase implements Task
     }
 
 
-    public function getCommand(): string {
+    public function getCommand(): string
+    {
         return 'phpcs';
     }
-
 
 
     public function getBeforeScript(): ?string
