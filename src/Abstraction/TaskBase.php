@@ -118,12 +118,12 @@ abstract class TaskBase implements Task
             $absoluteSrcFile = __DIR__ . '/../../' . $srcFile;
             $absoluteDestFile = \getcwd() . '/' . $destFile;
 
-            error_log('SRC FILE: ' . $absoluteSrcFile);
-            error_log('DEST FILE: ' . $absoluteDestFile);
+            \error_log('SRC FILE: ' . $absoluteSrcFile);
+            \error_log('DEST FILE: ' . $absoluteDestFile);
 
             // @todo Replace YOUR_PROJECT with composer project name
             $contents = \file_get_contents($absoluteSrcFile);
-            \file_put_contents( $absoluteDestFile, $contents);
+            \file_put_contents($absoluteDestFile, $contents);
 
             $this->taskReport('Copied ' . $absoluteSrcFile . ' to ' . $absoluteDestFile);
         }
