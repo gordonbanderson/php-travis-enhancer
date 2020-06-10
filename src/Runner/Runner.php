@@ -40,7 +40,7 @@ class Runner
                 $this->addPhpLint();
 
                 break;
-            case 'cs':
+            case 'phpcs':
                 $this->addCodingStandardsCheck();
 
                 break;
