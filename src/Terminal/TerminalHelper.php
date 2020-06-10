@@ -11,10 +11,12 @@ trait TerminalHelper
 {
     /**
      * Render a green tick in the terminal
+     *
+     * @psalm-suppress UndefinedMagicMethod
      */
     private function tick()
     {
-        $this->climate->bold()->darkGreen('✓');
+        $this->climate->bold()->dark()->green('✓');
     }
 
 
