@@ -13,7 +13,6 @@ class Runner
 
     use TerminalHelper;
 
-
     /** @var \League\CLImate\CLImate */
     private $climate;
 
@@ -21,7 +20,6 @@ class Runner
     {
         $this->climate = new CLImate();
         $this->climate->clear();
-
     }
 
 

@@ -6,12 +6,10 @@ trait TerminalHelper
 {
     /**
      * Render a green tick in the terminal
-     *
-     * @psalm-suppress UndefinedMagicMethod
      */
     private function tick(): void
     {
-        $this->climate->bold()->dark()->green('✓');
+        $this->climate->bold()->green('✓');
     }
 
 
