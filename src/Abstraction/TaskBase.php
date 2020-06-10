@@ -72,7 +72,7 @@ abstract class TaskBase implements Task
             /** @var string $prefix the bash prefix to check for the flag being set */
             $prefix = 'if [[ $' . $this->getFlag() .' ]]; then ';
 
-            $beforeScript = $this->getBeforeScript();
+            $beforeScript = $this->getTravisBeforeScript();
             if (isset($beforeScript)) {
                 // install jdscpd, node tool, for duplication detection
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'before_script');
@@ -80,7 +80,7 @@ abstract class TaskBase implements Task
                 $this->taskReport('Added before script: ' . $beforeScript);
             }
 
-            $script = $this->getScript();
+            $script = $this->getTravisScript();
             if (isset($script)) {
                 // run jscpd on src and tests dir
                 $helper->ensurePathExistsInYaml($yamlAsArray, 'script');

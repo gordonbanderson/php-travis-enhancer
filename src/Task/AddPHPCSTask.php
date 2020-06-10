@@ -20,13 +20,13 @@ class AddPHPCSTask extends TaskBase implements Task
     }
 
 
-    public function getBeforeScript(): ?string
+    public function getTravisBeforeScript(): ?string
     {
         return null;
     }
 
 
-    public function getScript(): ?string
+    public function getTravisScript(): ?string
     {
         return 'vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests';
     }

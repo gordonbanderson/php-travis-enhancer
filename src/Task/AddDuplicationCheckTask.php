@@ -20,7 +20,7 @@ class AddDuplicationCheckTask extends TaskBase implements Task
     }
 
 
-    public function getBeforeScript(): ?string
+    public function getTravisBeforeScript(): ?string
     {
         return 'sudo apt remove -y nodejs && curl '
             . '-sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh '
@@ -28,7 +28,7 @@ class AddDuplicationCheckTask extends TaskBase implements Task
     }
 
 
-    public function getScript(): ?string
+    public function getTravisScript(): ?string
     {
         return 'node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests';
     }

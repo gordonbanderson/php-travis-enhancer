@@ -13,11 +13,11 @@ interface Task
 
 
     /** @return string|null bash code to go in the before_script section, null if not required */
-    public function getBeforeScript(): ?string;
+    public function getTravisBeforeScript(): ?string;
 
 
     /** @return string|null bash code to go in the script section, null if not required */
-    public function getScript(): ?string;
+    public function getTravisScript(): ?string;
 
 
     /** @return array<string> list of composer packages to install */

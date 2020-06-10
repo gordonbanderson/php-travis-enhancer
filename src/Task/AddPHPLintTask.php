@@ -20,13 +20,13 @@ class AddPHPLintTask extends TaskBase implements Task
     }
 
 
-    public function getBeforeScript(): ?string
+    public function getTravisBeforeScript(): ?string
     {
         return null;
     }
 
 
-    public function getScript(): ?string
+    public function getTravisScript(): ?string
     {
         return 'vendor/bin/parallel-lint src/ tests/';
     }

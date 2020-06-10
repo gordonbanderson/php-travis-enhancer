@@ -20,13 +20,13 @@ class AddPHPStanTask extends TaskBase implements Task
     }
 
 
-    public function getBeforeScript(): ?string
+    public function getTravisBeforeScript(): ?string
     {
         return null;
     }
 
 
-    public function getScript(): ?string
+    public function getTravisScript(): ?string
     {
         return 'vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/;';
     }
