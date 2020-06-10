@@ -54,4 +54,10 @@ class AddPHPCSTask extends TaskBase implements Task
     {
         return ['files/ruleset.xml' => 'SRC_DIR/ruleset.xml'];
     }
+
+
+    public function isCodeCheck(): bool
+    {
+        return true;
+    }
 }

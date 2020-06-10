@@ -32,6 +32,10 @@ interface Task
     public function filesToCopy(): array;
 
 
+    /** @return bool true if this task is to be added to the composer codeCheck script command */
+    public function isCodeCheck(): bool;
+
+
     /**
      * Execute the task of altering the Travis file
      *

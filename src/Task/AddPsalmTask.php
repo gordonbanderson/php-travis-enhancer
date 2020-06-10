@@ -51,4 +51,10 @@ class AddPsalmTask extends TaskBase implements Task
     {
         return [];
     }
+
+
+    public function isCodeCheck(): bool
+    {
+        return true;
+    }
 }

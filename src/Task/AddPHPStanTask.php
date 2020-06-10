@@ -51,4 +51,10 @@ class AddPHPStanTask extends TaskBase implements Task
     {
         return ['files/phpstan.neon' => 'TESTS_DIR/phpstan.neon'];
     }
+
+
+    public function isCodeCheck(): bool
+    {
+        return true;
+    }
 }

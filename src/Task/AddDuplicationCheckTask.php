@@ -53,4 +53,10 @@ class AddDuplicationCheckTask extends TaskBase implements Task
     {
         return [];
     }
+
+
+    public function isCodeCheck(): bool
+    {
+        return false;
+    }
 }
