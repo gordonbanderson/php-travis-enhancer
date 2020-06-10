@@ -4,4 +4,4 @@ matrix:
             php: 7.4
             env: PHPSTAN_TEST=1
 script:
-    - 'if [[ $PHPSTAN_TEST ]]; then vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/; ; fi'
+    - 'if [[ $PHPSTAN_TEST ]]; then vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/ ; fi'
