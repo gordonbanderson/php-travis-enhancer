@@ -15,6 +15,9 @@ abstract class TaskBase implements Task
     /** @var \League\CLImate\CLImate */
     private $climate;
 
+    /** @var array<string> The names of the commands, e.g. phpstan, phpcs */
+    private static $codeCheckCommands = [];
+
     abstract public function getFlag(): string;
 
 
@@ -100,6 +103,9 @@ abstract class TaskBase implements Task
     }
 
 
+    /**
+     * Copy and files required for this task to their appropriate place in the hierarchy of the main project
+     */
     private function copyFiles(): void
     {
         $fileTransferArray = $this->filesToCopy();
@@ -131,11 +137,25 @@ abstract class TaskBase implements Task
                 $cmd = 'composer --verbose --profile require --dev ' . $package;
                 $output = [];
                 \exec($cmd, $output, $retVal);
-                \error_log('RET VAl: ' . $retVal);
                 $this->taskReport('Installing ' . $package, $retVal);
             }
         }
 
         return $retVal;
+    }
+
+
+    private function addScriptsToComposerJSON(): void
+    {
+        /** @var array<string,string> $scripts */
+        $scripts = $this->getComposerScripts();
+        foreach ($scripts as $scriptName => $bashCode) {
+            $this->climate->out('Adding script ' . $scriptName . ' --> ' . $bashCode);
+            if (!$this->isCodeCheck() || $scriptName === 'fixcs') {
+                continue;
+            }
+
+            self::$codeCheckCommands[] = 'composer ' . $scriptName;
+        }
     }
 }
