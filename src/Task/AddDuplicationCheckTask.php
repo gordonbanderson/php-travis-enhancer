@@ -34,6 +34,15 @@ class AddDuplicationCheckTask extends TaskBase implements Task
     }
 
 
+    /**
+     * @return string|null this command is only run within Travis, as it requires node and node_modules instsalled
+     */
+    public function getComposerScript(): array
+    {
+        return [];
+    }
+
+
     /** @return array<string> */
     public function getComposerPackages(): array
     {

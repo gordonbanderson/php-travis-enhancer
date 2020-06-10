@@ -31,6 +31,10 @@ class AddPHPLintTask extends TaskBase implements Task
         return 'vendor/bin/parallel-lint src/ tests/';
     }
 
+    public function getComposerScript(): array
+    {
+        return ["lint" => "vendor/bin/parallel-lint src/ tests/",];
+    }
 
     /** @return array<string> */
     public function getComposerPackages(): array
