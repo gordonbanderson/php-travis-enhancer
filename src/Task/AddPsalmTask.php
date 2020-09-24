@@ -28,7 +28,7 @@ class AddPsalmTask extends TaskBase implements Task
 
     public function getTravisScript(): ?string
     {
-        return './vendor/bin/psalm --show-info=true;';
+        return './vendor/bin/psalm --show-info=true';
     }
 
 
