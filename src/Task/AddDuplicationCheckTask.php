@@ -30,7 +30,7 @@ class AddDuplicationCheckTask extends TaskBase implements Task
 
     public function getTravisScript(): ?string
     {
-        return 'node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests';
+        return 'node_modules/jscpd/bin/jscpd -t 1 src';
     }
 
 
