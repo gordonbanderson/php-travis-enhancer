@@ -25,6 +25,6 @@ install:
 script:
     - 'if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit -d memory_limit=4G  tests/; fi'
     - 'if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit -d memory_limit=4G --coverage-clover=coverage.xml   tests/   ; fi'
-    - 'if [[ $DUPLICATE_CODE_CHECK ]]; then node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests ; fi'
+    - 'if [[ $DUPLICATE_CODE_CHECK ]]; then node_modules/jscpd/bin/jscpd -t 1 src ; fi'
 after_script:
     - 'if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi'
