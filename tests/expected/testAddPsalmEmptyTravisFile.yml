@@ -4,4 +4,4 @@ matrix:
             php: 7.4
             env: PSALM_TEST=1
 script:
-    - 'if [[ $PSALM_TEST ]]; then ./vendor/bin/psalm --show-info=true; ; fi'
+    - 'if [[ $PSALM_TEST ]]; then ./vendor/bin/psalm --show-info=true ; fi'
